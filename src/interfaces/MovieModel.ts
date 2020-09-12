@@ -1,7 +1,7 @@
-import { GenreModel } from './GenreModel';
-import { ProductionCompanyModel } from './ProductionCompanyModel';
-import { ProductionCountryModel } from './ProductionCountryModel';
-import { LanguageModel } from './LanguageModel';
+import { GenreModel } from './GenreModel'
+import { ProductionCompanyModel } from './ProductionCompanyModel'
+import { ProductionCountryModel } from './ProductionCountryModel'
+import { LanguageModel } from './LanguageModel'
 
 export interface MovieModel {
   genre_ids: number[]
