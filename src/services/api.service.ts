@@ -18,4 +18,15 @@ class ApiService {
 
 }
 
+axios.interceptors.request.use(
+  (config) => {
+    console.log('interceptou', config)
+    return config
+  },
+  (error) => {
+    console.log('interceptou erro', error)
+    return Promise.reject(error)
+  }
+)
+
 export default new ApiService()
