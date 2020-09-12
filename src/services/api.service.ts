@@ -1,6 +1,6 @@
 import axios from 'axios'
 import { AppConfig } from '../app.config'
-import { ApiResponse } from '../interfaces/ApiResponse'
+import { ApiResponse } from '../interfaces/ApiResponseModel'
 
 class ApiService {
 

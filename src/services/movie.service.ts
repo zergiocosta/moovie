@@ -1,4 +1,4 @@
-import { ApiResponse } from '../interfaces/ApiResponse'
+import { ApiResponse } from '../interfaces/ApiResponseModel'
 import ApiService from './api.service'
 
 class MovieService {
