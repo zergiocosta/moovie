@@ -1,8 +1,6 @@
 import 'react-native-gesture-handler'
 import React from 'react'
-import {
-  StyleSheet,
-} from 'react-native'
+import { StyleSheet } from 'react-native'
 import { NavigationContainer } from '@react-navigation/native'
 import { createStackNavigator } from '@react-navigation/stack'
 
@@ -17,13 +15,14 @@ const Stack = createStackNavigator()
 
 class App extends React.Component {
 
-  async componentDidMount() {
-    await this.setupImageConfig()
+
+  componentDidMount() {
+    this.setupImageConfig()
   }
 
   private async setupImageConfig(): Promise<void> {
-    const hasLocalConfig = await this.hasLocalImageConfig()
-    if (!hasLocalConfig) this.getImageConfigFromApi()
+    const hasLocalConfig: ImageConfigurationModel | boolean = await this.hasLocalImageConfig()
+    !hasLocalConfig && this.getImageConfigFromApi()
   }
 
   private async hasLocalImageConfig(): Promise<ImageConfigurationModel | boolean> {
@@ -36,19 +35,16 @@ class App extends React.Component {
     return hasLocalConfig
   }
 
-  private async getImageConfigFromApi(): Promise<void> {
+  private getImageConfigFromApi(): void {
     ImageConfigService.getImageConfig().then(
       (response: ApiResponse) => {
         (response.data) && this.setLocalImageConfig(response.data)
       }
-    ).catch(
-      err => console.log('catch getImageConfigFromApi()', err)
     )
   }
 
-  private async setLocalImageConfig(config: ImageConfigurationModel): Promise<void> {
-    console.log('vai setar config', config)
-    await StorageHelper.setObject('imageConfig', config)
+  private setLocalImageConfig(config: ImageConfigurationModel): void {
+    StorageHelper.setObject('imageConfig', config)
   }
 
   render() {

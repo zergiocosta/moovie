@@ -5,8 +5,8 @@ class MovieService {
 
   private baseUrl: string = 'movie'
 
-  public getUpcomingMovies(): Promise<ApiResponse> {
-    return ApiService.list(`${this.baseUrl}/upcoming`)
+  public getUpcomingMovies(params: any): Promise<ApiResponse> {
+    return ApiService.list(`${this.baseUrl}/upcoming`, params)
   }
 
   public getMovieById(movieId: number): Promise<ApiResponse> {
