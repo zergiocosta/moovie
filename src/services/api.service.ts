@@ -23,7 +23,7 @@ class ApiService {
 axios.interceptors.request.use(
   (config) => config,
   (error) => {
-    Toast.show('Ocorreu um erro')
+    Toast.show('Ocorreu um erro ao carregar o conteúdo')
     return Promise.reject(error)
   }
 )
