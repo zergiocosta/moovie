@@ -2,7 +2,7 @@ import * as React from 'react'
 import { Button, View, Text, ActivityIndicator, ScrollView } from 'react-native'
 
 import { MovieModel } from '../interfaces/MovieModel'
-import { ApiResponse } from '../interfaces/ApiResponse'
+import { ApiResponse } from '../interfaces/ApiResponseModel'
 import MovieService from '../services/movie.service'
 
 interface Props {
@@ -49,7 +49,6 @@ class Feed extends React.Component<Props, State> {
         <ScrollView>
           <View>
             {movies?.map((movie: MovieModel, index: number) => {
-              console.log('map', movie)
               return <Text key={movie.id}>{movie.title} - {index}</Text>
             })}
           </View>

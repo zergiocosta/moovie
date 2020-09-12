@@ -6,20 +6,39 @@ import {
 import { NavigationContainer } from '@react-navigation/native'
 import { createStackNavigator } from '@react-navigation/stack'
 
+import { ApiResponse } from './interfaces/ApiResponseModel'
 import Feed from './pages/Feed'
 import Single from './pages/Single'
+import ImageConfigService from './services/imageConfig.service'
 
 const Stack = createStackNavigator()
 
-const App = () => {
-  return (
-    <NavigationContainer>
-      <Stack.Navigator initialRouteName="Feed">
-        <Stack.Screen name="Feed" component={Feed} />
-        <Stack.Screen name="Single" component={Single} />
-      </Stack.Navigator>      
-    </NavigationContainer>
-  )
+class App extends React.Component {
+// const App = () => {
+
+  componentDidMount() {
+    console.log('FOIFOIFOIFOIFOFI')
+    this.getImageConfig()
+  }
+
+  private getImageConfig(): void {
+    ImageConfigService.getImageConfig().then(
+      (response: ApiResponse) => {
+        console.log('chegou config', response)
+      }
+    )
+  }
+
+  render() {
+    return (
+      <NavigationContainer>
+        <Stack.Navigator initialRouteName="Feed">
+          <Stack.Screen name="Feed" component={Feed} />
+          <Stack.Screen name="Single" component={Single} />
+        </Stack.Navigator>      
+      </NavigationContainer>
+    )
+  }
 }
 
 const styles = StyleSheet.create({
@@ -30,25 +49,6 @@ const styles = StyleSheet.create({
   sectionContainer: {
     marginTop: 32,
     paddingHorizontal: 24,
-  },
-  sectionTitle: {
-    fontSize: 24,
-    fontWeight: '600',
-  },
-  sectionDescription: {
-    marginTop: 8,
-    fontSize: 18,
-    fontWeight: '400',
-  },
-  highlight: {
-    fontWeight: '700',
-  },
-  footer: {
-    fontSize: 12,
-    fontWeight: '600',
-    padding: 4,
-    paddingRight: 12,
-    textAlign: 'right',
   },
 })
 
