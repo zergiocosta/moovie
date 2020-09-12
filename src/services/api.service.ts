@@ -2,6 +2,8 @@ import axios from 'axios'
 import { AppConfig } from '../app.config'
 import { ApiResponse } from '../interfaces/ApiResponseModel'
 
+import Toast from 'react-native-simple-toast'
+
 class ApiService {
 
   private root: string = AppConfig.baseUrl
@@ -19,12 +21,9 @@ class ApiService {
 }
 
 axios.interceptors.request.use(
-  (config) => {
-    console.log('interceptou', config)
-    return config
-  },
+  (config) => config,
   (error) => {
-    console.log('interceptou erro', error)
+    Toast.show('Ocorreu um erro')
     return Promise.reject(error)
   }
 )

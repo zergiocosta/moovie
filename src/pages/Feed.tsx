@@ -36,8 +36,6 @@ class Feed extends React.Component<Props, State> {
           movies: response.data.results
         })
       }
-    ).catch(
-      err => console.log(err)
     )
   }
 
