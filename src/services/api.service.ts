@@ -9,17 +9,25 @@ class ApiService {
   private root: string = AppConfig.baseUrl
   private apiKey: string = AppConfig.apiKey
 
+  constructor() {
+    axios.interceptors.response.use(
+      (response: AxiosResponse<ApiResponse>) => response,
+      (error: AxiosError) => {
+        Toast.show('Não foi possível carregar o conteúdo')
+        return Promise.reject(error)
+      }
+    )
+  }
+
   public list(url: string, params?: any): Promise<ApiResponse> {
     return axios.get(`${this.root}/${url}`, { params: this.requestOptionsParams(params) })
   }
   
-  public show(url: string, id: number): Promise<ApiResponse> {
-    console.log(`${this.root}/${url}/${id}?api_key=${this.apiKey}`)
-    return axios.get(`${this.root}/${url}/${id}?api_key=${this.apiKey}`)
+  public show(url: string, id: number, params?: any): Promise<ApiResponse> {
+    return axios.get(`${this.root}/${url}/${id}`, { params: this.requestOptionsParams(params) })
   }
 
   private requestOptionsParams(params?: any): any {
-    console.log(params)
     const requestParams = {
       api_key: this.apiKey,
       ...params
@@ -28,13 +36,5 @@ class ApiService {
   }
 
 }
-
-axios.interceptors.response.use(
-  (response: AxiosResponse<ApiResponse>) => response,
-  (error: AxiosError) => {
-    Toast.show('Ocorreu um erro ao carregar o conteúdo')
-    return Promise.reject(error)
-  }
-)
 
 export default new ApiService()
