@@ -1,9 +1,11 @@
 import * as React from 'react'
+import { RectButton } from 'react-native-gesture-handler'
 import {
-  TouchableOpacity,
   ScrollView,
   RefreshControl,
-  NativeScrollEvent, ActivityIndicator, StyleSheet
+  NativeScrollEvent,
+  ActivityIndicator,
+  StyleSheet
 } from 'react-native'
 import { AxiosError } from 'axios'
 
@@ -11,7 +13,6 @@ import { MovieModel } from '../interfaces/MovieModel'
 import { ApiResponse } from '../interfaces/ApiResponseModel'
 import CardMovie from '../components/CardMovie'
 import MovieService from '../services/movie.service'
-import { RectButton } from 'react-native-gesture-handler'
 
 interface Props {
   navigation: any
@@ -85,7 +86,10 @@ class Feed extends React.Component<Props, State> {
 
   private handleScrolling(nativeEvent: NativeScrollEvent): void {
     if (this.isCloseToBottom(nativeEvent) && this.state.page < this.state.totalPages) {
-      this.getMovies(this.state.page+1)
+      if (!this.state.isLoading) {
+        this.setState({isLoading: true})
+        this.getMovies(this.state.page+1)
+      }
     }
   }
 
@@ -103,7 +107,7 @@ class Feed extends React.Component<Props, State> {
       <ScrollView
         style={styles.container}
         onScroll={({nativeEvent}) => this.handleScrolling(nativeEvent)}
-        scrollEventThrottle={400}
+        scrollEventThrottle={9999}
         refreshControl={
           <RefreshControl 
             refreshing={isLoading}
