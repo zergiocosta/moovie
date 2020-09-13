@@ -3,7 +3,7 @@ import {
   TouchableOpacity,
   ScrollView,
   RefreshControl,
-  NativeScrollEvent, ActivityIndicator
+  NativeScrollEvent, ActivityIndicator, StyleSheet
 } from 'react-native'
 import { AxiosError } from 'axios'
 
@@ -101,6 +101,7 @@ class Feed extends React.Component<Props, State> {
     
     return (
       <ScrollView
+        style={styles.container}
         onScroll={({nativeEvent}) => this.handleScrolling(nativeEvent)}
         scrollEventThrottle={400}
         refreshControl={
@@ -131,3 +132,12 @@ class Feed extends React.Component<Props, State> {
 }
 
 export default Feed
+
+const styles = StyleSheet.create({
+  container: {
+    backgroundColor: '#333',
+    paddingTop: 12,
+    paddingLeft: 24,
+    paddingRight: 24
+  }
+})

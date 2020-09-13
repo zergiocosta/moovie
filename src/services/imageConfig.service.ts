@@ -1,5 +1,7 @@
+import StorageHelper from '../helpers/StorageHelper'
 import { ApiResponse } from '../interfaces/ApiResponseModel'
 import ApiService from './api.service'
+import { ImageConfigurationModel } from '../interfaces/ImageConfigurationModel';
 
 class ImageConfigService {
 

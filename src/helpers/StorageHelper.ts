@@ -9,6 +9,7 @@ class StorageHelper {
 
   public async getObject(key: string): Promise<any> {
     const value = await AsyncStorage.getItem(key)
+    console.log(value)
     return (value) ? JSON.parse(value) : null
   }
 

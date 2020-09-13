@@ -9,6 +9,9 @@ import { ImageConfigurationModel } from './interfaces/ImageConfigurationModel'
 import Feed from './pages/Feed'
 import Single from './pages/Single'
 import ImageConfigService from './services/imageConfig.service'
+import { StyleSheet } from 'react-native'
+import { color } from 'react-native-reanimated'
+import { StatusBar } from 'react-native'
 
 class App extends React.Component {
 
@@ -18,6 +21,7 @@ class App extends React.Component {
 
   private async setupImageConfig(): Promise<void> {
     const hasLocalConfig: ImageConfigurationModel | boolean = await this.hasLocalImageConfig()
+    console.log(hasLocalConfig)
     !hasLocalConfig && this.getImageConfigFromApi()
   }
 
@@ -48,9 +52,30 @@ class App extends React.Component {
     
     return (
       <NavigationContainer>
+        <StatusBar barStyle="light-content" />
         <Stack.Navigator initialRouteName="Feed">
-          <Stack.Screen name="Feed" component={Feed} />
-          <Stack.Screen name="Single" component={Single} />
+          <Stack.Screen 
+            name="Feed"
+            component={Feed}
+            options={{
+              title: 'moovie',
+              headerStyle: {
+                backgroundColor: '#111', 
+              },
+              headerTintColor: '#eee',
+            }}
+          />
+          <Stack.Screen
+            name="Single"
+            component={Single}
+            options={{
+              title: 'moovie',
+              headerStyle: {
+                backgroundColor: '#111', 
+              },
+              headerTintColor: '#eee',
+            }}
+          />
         </Stack.Navigator>      
       </NavigationContainer>
     )
