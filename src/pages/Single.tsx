@@ -32,6 +32,7 @@ class Single extends React.Component<Props, State> {
   private async getMovieById(movieId: number): Promise<void> {
     MovieService.getMovieById(movieId).then(
       (response: ApiResponse) => {
+        console.log(response.data)
         this.setState({
           movie: response.data as MovieModel
         })

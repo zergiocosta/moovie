@@ -1,10 +1,9 @@
 import * as React from 'react'
 import {
-  View,
   TouchableOpacity,
   ScrollView,
   RefreshControl,
-  NativeScrollEvent
+  NativeScrollEvent, ActivityIndicator
 } from 'react-native'
 import { AxiosError } from 'axios'
 
@@ -12,6 +11,7 @@ import { MovieModel } from '../interfaces/MovieModel'
 import { ApiResponse } from '../interfaces/ApiResponseModel'
 import CardMovie from '../components/CardMovie'
 import MovieService from '../services/movie.service'
+import { RectButton } from 'react-native-gesture-handler'
 
 interface Props {
   navigation: any
@@ -43,10 +43,15 @@ class Feed extends React.Component<Props, State> {
     this.getMovies()
   }
 
+  /**
+   * it fetches the upcoming movies within the specified page
+   * and sets the state based on whether it's in the first, the last or the in-between pages
+   */
   private async getMovies(page: number = 1): Promise<void> {
     await MovieService.getUpcomingMovies({page: page}).then(
       (response: ApiResponse) => {
         let movies: MovieModel[] = []
+        console.log(response.data?.results)
         if (page === 1 && response.data?.results) movies = response.data.results
         if (page > 1 && response.data?.results) {
           movies = (this.state.movies) ? 
@@ -64,7 +69,7 @@ class Feed extends React.Component<Props, State> {
       (error: AxiosError) => {
         this.setState({
           isLoading: false,
-          movies: []
+          movies: this.state.movies
         })
       }
     )
@@ -105,19 +110,21 @@ class Feed extends React.Component<Props, State> {
           />
         }
       >
-        <View>
-          {movies?.map((movie: MovieModel, index: number) => {
-            return (
-              <TouchableOpacity 
-                key={movie.id}
-                onPress={() => this.goToMovie(movie)}>
-                <CardMovie
-                  movie={movie}
-                />
-              </TouchableOpacity>
-            )
-          })}
-        </View>
+        {movies?.map((movie: MovieModel, index: number) => {
+          return (
+            <RectButton 
+              key={movie.id}
+              onPress={() => this.goToMovie(movie)}>
+              <CardMovie
+                movie={movie}
+              />
+            </RectButton>
+          )
+        })}
+        {
+          (this.state.page < this.state.totalPages) &&
+            <ActivityIndicator />
+        }
       </ScrollView>
     )
   }
