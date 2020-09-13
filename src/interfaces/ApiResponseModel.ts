@@ -3,7 +3,7 @@ import { Images } from './ImageConfigurationModel'
 
 export interface ApiResponse {
   status: number
-  data: {
+  data?: {
     results?: MovieModel[]
     page?: number
     total_results?: number

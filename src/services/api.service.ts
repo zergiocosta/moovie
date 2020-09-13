@@ -10,13 +10,7 @@ class ApiService {
   private apiKey: string = AppConfig.apiKey
 
   constructor() {
-    axios.interceptors.response.use(
-      (response: AxiosResponse<ApiResponse>) => response,
-      (error: AxiosError) => {
-        Toast.show('Não foi possível carregar o conteúdo')
-        return Promise.reject(error)
-      }
-    )
+    this.setupResponseInterceptor()
   }
 
   public list(url: string, params?: any): Promise<ApiResponse> {
@@ -33,6 +27,16 @@ class ApiService {
       ...params
     }
     return requestParams
+  }
+
+  private setupResponseInterceptor(): void {
+    axios.interceptors.response.use(
+      (response: AxiosResponse<ApiResponse>) => response,
+      (error: AxiosError) => {
+        Toast.show('Não foi possível carregar o conteúdo')
+        return Promise.reject(error)
+      }
+    )
   }
 
 }

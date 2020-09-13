@@ -1,6 +1,5 @@
 import * as React from 'react'
 import {
-  Button,
   View,
   TouchableOpacity,
   ScrollView,
@@ -48,8 +47,8 @@ class Feed extends React.Component<Props, State> {
     await MovieService.getUpcomingMovies({page: page}).then(
       (response: ApiResponse) => {
         let movies: MovieModel[] = []
-        if (page === 1 && response.data.results) movies = response.data.results
-        if (page > 1 && response.data.results) {
+        if (page === 1 && response.data?.results) movies = response.data.results
+        if (page > 1 && response.data?.results) {
           movies = (this.state.movies) ? 
                     this.state.movies?.concat(response.data.results) : 
                     response.data.results
@@ -57,7 +56,7 @@ class Feed extends React.Component<Props, State> {
         this.setState({
           isLoading: false,
           page: page,
-          totalPages: (response.data.total_pages) ? response.data.total_pages : this.state.totalPages,
+          totalPages: (response.data?.total_pages) ? response.data.total_pages : this.state.totalPages,
           movies: movies
         })
       }
@@ -71,8 +70,8 @@ class Feed extends React.Component<Props, State> {
     )
   }
 
-  private goToMovie(movieId: number): void {
-    this.props.navigation.navigate('Single', { movieId: movieId })
+  private goToMovie(movie: MovieModel): void {
+    this.props.navigation.navigate('Single', { movie: movie })
   }
 
   private refreshFeed(): void {
@@ -111,7 +110,7 @@ class Feed extends React.Component<Props, State> {
             return (
               <TouchableOpacity 
                 key={movie.id}
-                onPress={() => this.goToMovie(movie.id)}>
+                onPress={() => this.goToMovie(movie)}>
                 <CardMovie
                   movie={movie}
                 />
