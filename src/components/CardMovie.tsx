@@ -1,10 +1,11 @@
 import { faCalendarCheck, faGlobeAmericas, faStar } from '@fortawesome/free-solid-svg-icons'
 import React, { useState, useEffect } from 'react'
-import { Image, ImageBackground, StyleSheet, Text, View } from 'react-native'
+import { StyleSheet, Text, View } from 'react-native'
+
 import StorageHelper from '../helpers/StorageHelper'
 import { MovieModel } from '../interfaces/MovieModel'
-import CardMovieInfo from './CardMovieInfo'
 import { ImageConfigurationModel } from '../interfaces/ImageConfigurationModel'
+import CardMovieInfo from './CardMovieInfo'
 import ImageWithEffect from './ImageWithEffect'
 
 interface Props {
@@ -14,6 +15,7 @@ interface Props {
 const CardMovie: React.FC<Props> = (props: Props) => {
 
   const POSTER_ASPECT_RATIO: number = 0.69
+  const POSTER_CARD_WIDTH: number = 120
 
   const [baseUrl, setBaseUrl] = useState('')
   const [imageSize, setImageSize] = useState('')
@@ -29,36 +31,33 @@ const CardMovie: React.FC<Props> = (props: Props) => {
         }
       }
     )
-    return () => {
-      
-    }
   })
 
   return (
     <View style={styles.cardContainer}>
       <ImageWithEffect
-        main={`${baseUrl}/${imageSize}/${props.movie.poster_path}`}
-        thumb={`${baseUrl}/${thumbSize}/${props.movie.poster_path}`}
+        main={`${baseUrl}/${imageSize}/${props.movie?.poster_path}`}
+        thumb={`${baseUrl}/${thumbSize}/${props.movie?.poster_path}`}
+        width={POSTER_CARD_WIDTH}
         aspectRatio={POSTER_ASPECT_RATIO}
       />
       <View style={styles.cardInfo}>
         <Text 
-          style={styles.movieName} 
-          key={props.movie.id}
+          style={styles.movieName}
         >
-          {props.movie.title}
+          {props.movie?.title}
         </Text>
         <CardMovieInfo
           icon={faCalendarCheck}
-          date={props.movie.release_date} 
+          date={props.movie?.release_date} 
         />
         <CardMovieInfo
           icon={faGlobeAmericas}
-          text={`Language: ${props.movie.original_language}`}
+          text={`Language: ${props.movie?.original_language}`}
         />
         <CardMovieInfo
           icon={faStar}
-          text={props.movie.vote_average} 
+          text={props.movie?.vote_average} 
         />
       </View>
     </View>
@@ -78,11 +77,6 @@ const styles = StyleSheet.create({
     marginTop: 12,
     borderTopRightRadius: 12,
     borderBottomRightRadius: 12
-  },
-  cardImage: {
-    width: 120,
-    resizeMode: 'contain',
-    aspectRatio: 0.69
   },
   cardInfo: {
     padding: 24

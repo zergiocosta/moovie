@@ -1,11 +1,8 @@
-import { faCalendarCheck } from '@fortawesome/free-solid-svg-icons'
-import { FontAwesomeIcon } from '@fortawesome/react-native-fontawesome'
 import React from 'react'
-import { Text } from 'react-native'
-import { StyleSheet } from 'react-native'
-import { View } from 'react-native'
+import { Text, StyleSheet } from 'react-native'
+import { FontAwesomeIcon } from '@fortawesome/react-native-fontawesome'
+
 import DateHelper from '../helpers/DateHelper'
-import { MovieModel } from '../interfaces/MovieModel'
 
 interface Props {
   icon: any
@@ -14,6 +11,7 @@ interface Props {
 }
 
 const CardMovieInfo: React.FC<Props> = (props: Props) => {
+  console.log(props)
   const { icon, date, text } = props
   let convertedDate: string = ''
   if (date) {
@@ -23,11 +21,13 @@ const CardMovieInfo: React.FC<Props> = (props: Props) => {
     <Text 
       style={styles.cardText}
     >
-      <FontAwesomeIcon
-        style={styles.icon}
-        color="#eee" 
-        icon={ icon }
-      />
+      {(!!text || !!date) &&
+        <FontAwesomeIcon
+          style={styles.icon}
+          color="#eee" 
+          icon={ icon }
+        />
+      }
       {!!text && text}
       {!!date && `Release: ${convertedDate}`}
     </Text>
@@ -44,6 +44,6 @@ const styles = StyleSheet.create({
     justifyContent: 'center'
   },
   icon: {
-    marginRight: 8
+    marginRight: 32
   }
 })
