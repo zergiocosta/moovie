@@ -1,5 +1,6 @@
 import 'react-native-gesture-handler'
 import React from 'react'
+import { StatusBar } from 'react-native'
 import { NavigationContainer } from '@react-navigation/native'
 import { createStackNavigator } from '@react-navigation/stack'
 
@@ -9,9 +10,6 @@ import { ImageConfigurationModel } from './interfaces/ImageConfigurationModel'
 import Feed from './pages/Feed'
 import Single from './pages/Single'
 import ImageConfigService from './services/imageConfig.service'
-import { StyleSheet } from 'react-native'
-import { color } from 'react-native-reanimated'
-import { StatusBar } from 'react-native'
 
 class App extends React.Component {
 
@@ -21,7 +19,6 @@ class App extends React.Component {
 
   private async setupImageConfig(): Promise<void> {
     const hasLocalConfig: ImageConfigurationModel | boolean = await this.hasLocalImageConfig()
-    console.log(hasLocalConfig)
     !hasLocalConfig && this.getImageConfigFromApi()
   }
 
