@@ -1,18 +1,18 @@
 import * as React from 'react'
 import { RectButton } from 'react-native-gesture-handler'
 import {
-  ScrollView,
   RefreshControl,
   NativeScrollEvent,
-  ActivityIndicator,
-  StyleSheet
+  ActivityIndicator
 } from 'react-native'
 import { AxiosError } from 'axios'
 
-import { MovieModel } from '../interfaces/MovieModel'
-import { ApiResponse } from '../interfaces/ApiResponseModel'
-import CardMovie from '../components/CardMovie'
-import MovieService from '../services/movie.service'
+import { MovieModel } from '../../interfaces/MovieModel'
+import { ApiResponse } from '../../interfaces/ApiResponseModel'
+import CardMovie from '../../components/CardMovie'
+import MovieService from '../../services/movie.service'
+
+import { StyledScrollView } from './styles'
 
 interface Props {
   navigation: any
@@ -104,8 +104,7 @@ class Feed extends React.Component<Props, State> {
     let {isLoading, movies} = this.state
     
     return (
-      <ScrollView
-        style={styles.container}
+      <StyledScrollView
         onScroll={({nativeEvent}) => this.handleScrolling(nativeEvent)}
         scrollEventThrottle={9999}
         refreshControl={
@@ -130,18 +129,9 @@ class Feed extends React.Component<Props, State> {
           (this.state.page < this.state.totalPages) &&
             <ActivityIndicator />
         }
-      </ScrollView>
+      </StyledScrollView>
     )
   }
 }
 
 export default Feed
-
-const styles = StyleSheet.create({
-  container: {
-    backgroundColor: '#333',
-    paddingTop: 12,
-    paddingLeft: 24,
-    paddingRight: 24
-  }
-})

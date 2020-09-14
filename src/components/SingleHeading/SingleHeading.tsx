@@ -1,12 +1,12 @@
 
 import React, { useState, useEffect } from 'react'
-import { StyleSheet, Text } from 'react-native'
 import { View } from 'react-native'
 
-import StorageHelper from '../helpers/StorageHelper'
-import { ImageConfigurationModel } from '../interfaces/ImageConfigurationModel'
-import { MovieModel } from '../interfaces/MovieModel'
-import ImageWithEffect from './ImageWithEffect'
+import StorageHelper from '../../helpers/StorageHelper'
+import { ImageConfigurationModel } from '../../interfaces/ImageConfigurationModel'
+import { MovieModel } from '../../interfaces/MovieModel'
+import ImageWithEffect from './../ImageWithEffect/ImageWithEffect'
+import { Title } from './styles'
 
 interface Props {
   movie: MovieModel
@@ -41,21 +41,9 @@ const SingleHeading: React.FC<Props> = (props: Props) => {
         width={POSTER_CARD_WIDTH}
         aspectRatio={POSTER_ASPECT_RATIO}
       />
-      <Text style={styles.singleTitle}>{props.movie?.title}</Text>
+      <Title>{props.movie?.title}</Title>
     </View>
   )
 }
 
 export default SingleHeading
-
-const styles = StyleSheet.create({
-  singleTitle: {
-    fontSize: 24,
-    position: 'absolute',
-    bottom: 0,
-    color: '#eee',
-    padding: 24,
-    backgroundColor: 'rgba(0, 0, 0, 0.6)',
-    width: '100%'
-  }
-})

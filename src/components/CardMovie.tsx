@@ -6,7 +6,7 @@ import StorageHelper from '../helpers/StorageHelper'
 import { MovieModel } from '../interfaces/MovieModel'
 import { ImageConfigurationModel } from '../interfaces/ImageConfigurationModel'
 import CardMovieInfo from './CardMovieInfo'
-import ImageWithEffect from './ImageWithEffect'
+import ImageWithEffect from './ImageWithEffect/ImageWithEffect'
 
 interface Props {
   movie: MovieModel
