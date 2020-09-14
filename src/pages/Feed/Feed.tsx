@@ -1,10 +1,5 @@
 import * as React from 'react'
 import { RectButton } from 'react-native-gesture-handler'
-import {
-  RefreshControl,
-  NativeScrollEvent,
-  ActivityIndicator
-} from 'react-native'
 import { AxiosError } from 'axios'
 
 import { MovieModel } from '../../interfaces/MovieModel'
@@ -12,7 +7,7 @@ import { ApiResponse } from '../../interfaces/ApiResponseModel'
 import CardMovie from '../../components/CardMovie'
 import MovieService from '../../services/movie.service'
 
-import { StyledScrollView } from './styles'
+import { StyledFlatList } from './styles'
 
 interface Props {
   navigation: any
@@ -36,6 +31,7 @@ class Feed extends React.Component<Props, State> {
       movies: []
     }
 
+    this.renderItem = this.renderItem.bind(this)
     this.refreshFeed = this.refreshFeed.bind(this)
     this.handleScrolling = this.handleScrolling.bind(this)
   }
@@ -83,52 +79,38 @@ class Feed extends React.Component<Props, State> {
     this.getMovies()
   }
 
-  private handleScrolling(nativeEvent: NativeScrollEvent): void {
-    if (this.isCloseToBottom(nativeEvent) && this.state.page < this.state.totalPages) {
-      if (!this.state.isLoading) {
-        this.setState({isLoading: true})
-        this.getMovies(this.state.page+1)
-      }
-    }
+  private handleScrolling(): void {
+    // if (!this.state.isLoading) {
+      this.setState({isLoading: true})
+      this.getMovies(this.state.page+1)
+    // }
   }
 
-  private isCloseToBottom(nativeElement: NativeScrollEvent): boolean {
-    const { layoutMeasurement, contentOffset, contentSize } = nativeElement
-    const paddingToBottom = 20
-    return layoutMeasurement.height + contentOffset.y >=
-      contentSize.height - paddingToBottom
+  private renderItem(movie: MovieModel) {
+    return (
+      <RectButton
+        underlayColor="#EEEEEE"
+        onPress={() => this.goToMovie(movie)}>
+        <CardMovie
+          movie={movie}
+        />
+      </RectButton>
+    )
   }
 
   render(): Element {
     let {isLoading, movies} = this.state
 
     return (
-      <StyledScrollView
-        onScroll={({nativeEvent}) => this.handleScrolling(nativeEvent)}
-        scrollEventThrottle={9999}
-        refreshControl={
-          <RefreshControl
-            refreshing={isLoading}
-            onRefresh={this.refreshFeed}
-          />
-        }
-      >
-        {movies?.map((movie: MovieModel, index: number) => {
-          return (
-            <RectButton
-              key={movie.id}
-              onPress={() => this.goToMovie(movie)}>
-              <CardMovie
-                movie={movie}
-              />
-            </RectButton>
-          )
-        })}
-        {
-          (this.state.page < this.state.totalPages) &&
-            <ActivityIndicator />
-        }
-      </StyledScrollView>
+      <StyledFlatList
+        data={movies}
+        renderItem={(item: any) => this.renderItem(item.item)}
+        keyExtractor={(item: any) => item.id}
+        onEndReached={() => this.handleScrolling()}
+        onEndReachedThreshold={400}
+        refreshing={isLoading}
+        onRefresh={() => this.refreshFeed()}
+      />
     )
   }
 }
