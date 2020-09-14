@@ -7,8 +7,8 @@ LINE  = -----------------------------------------
 
 
 # -- TASK ---------------------------------------
-# -- Pass: raspemania
-# keytool -genkey -v -keystore raspemania.jks -keyalg RSA -keysize 2048 -validity 10000 -alias raspemania
+# -- Pass: moovie
+# keytool -genkeypair -v -keystore moovie.keystore -alias moovie -keyalg RSA -keysize 2048 -validity 10000
 
 run-android:
 	@echo " $(INFO) Rodando no dispositivo Android"
