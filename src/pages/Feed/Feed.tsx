@@ -107,7 +107,7 @@ class Feed extends React.Component<Props, State> {
         renderItem={(item: any) => this.renderItem(item.item)}
         keyExtractor={(item: any) => item.id}
         onEndReached={() => this.handleScrolling()}
-        onEndReachedThreshold={400}
+        onEndReachedThreshold={2}
         refreshing={isLoading}
         onRefresh={() => this.refreshFeed()}
       />
