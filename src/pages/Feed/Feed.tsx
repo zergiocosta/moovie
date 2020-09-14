@@ -22,7 +22,7 @@ interface State {
   isLoading: boolean
   page: number
   totalPages: number
-  movies: MovieModel[] | undefined
+  movies?: MovieModel[]
 }
 
 class Feed extends React.Component<Props, State> {
@@ -52,11 +52,10 @@ class Feed extends React.Component<Props, State> {
     await MovieService.getUpcomingMovies({page: page}).then(
       (response: ApiResponse) => {
         let movies: MovieModel[] = []
-        console.log(response.data?.results)
         if (page === 1 && response.data?.results) movies = response.data.results
         if (page > 1 && response.data?.results) {
-          movies = (this.state.movies) ? 
-                    this.state.movies?.concat(response.data.results) : 
+          movies = (this.state.movies) ?
+                    this.state.movies?.concat(response.data.results) :
                     response.data.results
         }
         this.setState({
@@ -100,15 +99,15 @@ class Feed extends React.Component<Props, State> {
       contentSize.height - paddingToBottom
   }
 
-  render() {
+  render(): Element {
     let {isLoading, movies} = this.state
-    
+
     return (
       <StyledScrollView
         onScroll={({nativeEvent}) => this.handleScrolling(nativeEvent)}
         scrollEventThrottle={9999}
         refreshControl={
-          <RefreshControl 
+          <RefreshControl
             refreshing={isLoading}
             onRefresh={this.refreshFeed}
           />
@@ -116,7 +115,7 @@ class Feed extends React.Component<Props, State> {
       >
         {movies?.map((movie: MovieModel, index: number) => {
           return (
-            <RectButton 
+            <RectButton
               key={movie.id}
               onPress={() => this.goToMovie(movie)}>
               <CardMovie

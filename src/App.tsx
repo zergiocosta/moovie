@@ -27,7 +27,7 @@ class App extends React.Component {
     await StorageHelper.getObject('imageConfig').then(
       res => {
         if (res) hasLocalConfig = res
-      }  
+      }
     )
     return hasLocalConfig
   }
@@ -46,18 +46,18 @@ class App extends React.Component {
 
   render() {
     const Stack = createStackNavigator()
-    
+
     return (
       <NavigationContainer>
         <StatusBar barStyle="light-content" />
         <Stack.Navigator initialRouteName="Feed">
-          <Stack.Screen 
+          <Stack.Screen
             name="Feed"
             component={Feed}
             options={{
               title: 'moovie',
               headerStyle: {
-                backgroundColor: '#111', 
+                backgroundColor: '#111',
               },
               headerTintColor: '#eee',
             }}
@@ -68,12 +68,12 @@ class App extends React.Component {
             options={{
               title: 'moovie',
               headerStyle: {
-                backgroundColor: '#111', 
+                backgroundColor: '#111',
               },
               headerTintColor: '#eee',
             }}
           />
-        </Stack.Navigator>      
+        </Stack.Navigator>
       </NavigationContainer>
     )
   }
