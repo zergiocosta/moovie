@@ -1,38 +1,42 @@
 import React from 'react'
 import { View, Text } from 'react-native'
 
+import DateHelper from '../../helpers/DateHelper'
 import { MovieModel } from '../../interfaces/MovieModel'
 import MovieService from '../../services/movie.service'
 import { ApiResponse } from '../../interfaces/ApiResponseModel'
 import SingleHeading from '../../components/SingleHeading/SingleHeading'
-import CardMovieInfo from '../../components/CardMovieInfo'
 import Tag from '../../components/Tag/Tag'
-import { 
-  faCalendarCheck,
+import {
+  faChartLine,
   faGlobeAmericas,
   faStar,
   faTags
 } from '@fortawesome/free-solid-svg-icons'
 import { FontAwesomeIcon } from '@fortawesome/react-native-fontawesome'
 
-import { 
+import {
   StyledGenresWrapper,
   StyledLabel,
   StyledSquaresWrapper,
   StyledSquareItem,
   StyledSquareItemBordered,
+  StyledSquareText,
   StyledContentText,
+  StyledContentTagline,
   StyledSingleInfoWrapper
 } from './styles'
+import { ScrollView } from 'react-native-gesture-handler'
 
 interface Props {
   navigation: any
   route: any
-  movie: MovieModel
+  params: any
 }
 
 interface State {
   movie?: MovieModel
+  release_date: string
   isLoading: boolean
 }
 
@@ -40,8 +44,13 @@ class Single extends React.Component<Props, State> {
 
   constructor(props: Readonly<Props>) {
     super(props)
-    console.log(props)
+    this.setInitialState(props.route.params.movie)
+  }
+
+  private setInitialState(movie: MovieModel): void {
     this.state = {
+      movie: movie,
+      release_date: DateHelper.apiDateToHumanReadableFormat(movie.release_date),
       isLoading: true
     }
   }
@@ -52,67 +61,94 @@ class Single extends React.Component<Props, State> {
   }
 
   private async getMovieById(movieId: number): Promise<void> {
-    console.log(movieId)
+    console.log('vai buscar o filme', movieId)
     MovieService.getMovieById(movieId).then(
       (response: ApiResponse) => {
-        console.log(response)
+        console.log('date', response.data)
         this.setState({
           movie: response.data as MovieModel,
           isLoading: false
-        }, () => console.log(this.state.movie))
+        }, () => console.log('ignore'))
       }
     )
   }
-  
-  render() {
+
+  render(): Element {
     return (
-      <View>
+      <ScrollView>
         <SingleHeading movie={this.state.movie!} />
 
         <StyledSquaresWrapper>
           <StyledSquareItem>
-            <Text>{this.state.movie?.production_countries[0].iso_3166_1}</Text>
+            {!!this.state.movie?.production_countries &&
+              <View>
+                <FontAwesomeIcon
+                  style={{color: '#eee'}}
+                  icon={faGlobeAmericas}
+                />
+                <StyledSquareText>{this.state.movie?.production_countries[0]?.iso_3166_1}</StyledSquareText>
+              </View>
+            }
           </StyledSquareItem>
           <StyledSquareItemBordered>
-            <Text>{this.state.movie?.vote_count}</Text>
+            <FontAwesomeIcon
+              style={{color: '#eee'}}
+              icon={faChartLine}
+            />
+            <StyledSquareText>{this.state.movie?.vote_count}</StyledSquareText>
           </StyledSquareItemBordered>
           <StyledSquareItem>
-            <Text>{this.state.movie?.vote_average}</Text>
+            <FontAwesomeIcon
+              style={{color: '#eee'}}
+              icon={faStar}
+            />
+            <StyledSquareText>{this.state.movie?.vote_average}</StyledSquareText>
           </StyledSquareItem>
         </StyledSquaresWrapper>
 
-        <StyledGenresWrapper>
-          <FontAwesomeIcon size={32} icon={faTags} />
-          {this.state.movie?.genres.map((item: any) => {
-            return <Tag key={item.id} name={item.name} />
-          })}
-        </StyledGenresWrapper>
+        {!!this.state.movie?.genres &&
+          <StyledGenresWrapper>
+            <FontAwesomeIcon size={32} icon={faTags} />
+            {this.state.movie?.genres.map((item: any) => {
+              return <Tag key={item.id} name={item.name} />
+            })}
+          </StyledGenresWrapper>
+        }
 
         <StyledSingleInfoWrapper>
-          <StyledLabel>Overview:</StyledLabel>
-          <StyledContentText>
-            {this.state.movie?.overview}
-          </StyledContentText>
-          
+          {!!this.state.movie?.tagline &&
+            <StyledContentTagline>
+              {this.state.movie?.title} - {this.state.movie?.tagline}
+            </StyledContentTagline>
+          }
+
+          {!!this.state.movie?.overview &&
+            <>
+              <StyledLabel>Overview:</StyledLabel>
+              <StyledContentText>
+                {this.state.movie?.overview}
+              </StyledContentText>
+            </>
+          }
+
+          {!!this.state.movie?.production_companies &&
+            <>
+              <StyledLabel>Production:</StyledLabel>
+              <StyledContentText>
+                {this.state.movie?.production_companies.map((company) => {
+                  return <StyledContentText key={company.id}>{company.name}</StyledContentText>
+                })}
+              </StyledContentText>
+            </>
+          }
+
           <StyledLabel>Release date:</StyledLabel>
           <StyledContentText>
-            {this.state.movie?.release_date}
+            {this.state.release_date}
           </StyledContentText>
 
-          <CardMovieInfo
-            icon={faCalendarCheck}
-            date={this.state.movie?.release_date} 
-          />
-          <CardMovieInfo
-            icon={faGlobeAmericas}
-            text={`Language: ${this.state.movie?.original_language}`}
-          />
-          <CardMovieInfo
-            icon={faStar}
-            text={this.state.movie?.vote_average} 
-          />
         </StyledSingleInfoWrapper>
-      </View>
+      </ScrollView>
     )
   }
 }

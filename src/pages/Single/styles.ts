@@ -21,19 +21,22 @@ const StyledSquaresWrapper = styled.View`
 `
 
 const StyledSquareItem = styled.View`
-  width: 33,33%;
-  padding-top: 24px;
-  padding-bottom: 24px;
+  width: 33%;
+  padding-vertical: 24px;
+  align-items: center;
 `
 
-const StyledSquareItemBordered = styled.View`
-  width: 33,33%;
-  padding-top: 24px;
-  padding-bottom: 24px;
+const StyledSquareItemBordered = styled(StyledSquareItem)`
+  width: 34%;
   border-left-color: #555;
   border-left-width: 1px;
   border-right-color: #555;
   border-right-width: 1px;
+`
+
+const StyledSquareText = styled.Text`
+  color: #eee;
+  font-size: 16px;
 `
 
 const StyledSingleInfoWrapper = styled.View`
@@ -46,12 +49,19 @@ const StyledContentText = styled.Text`
   margin-bottom: 32px;
 `
 
-export { 
+const StyledContentTagline = styled.Text`
+  font-size: 24px;
+  margin-bottom: 24px;
+`
+
+export {
   StyledGenresWrapper,
   StyledLabel,
   StyledSquaresWrapper,
   StyledSquareItem,
   StyledSquareItemBordered,
+  StyledSquareText,
   StyledContentText,
+  StyledContentTagline,
   StyledSingleInfoWrapper
 }

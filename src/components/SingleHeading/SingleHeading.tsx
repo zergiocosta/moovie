@@ -21,7 +21,6 @@ const SingleHeading: React.FC<Props> = (props: Props) => {
   const [thumbSize, setThumbSize] = useState('')
 
   useEffect(() => {
-    console.log(props.movie)
     StorageHelper.getObject('imageConfig').then(
       (response: ImageConfigurationModel) => {
         if (response.images?.base_url) {
