@@ -1,12 +1,8 @@
-# -- UTILS --------------------------------------
-
-DONE  = \033[32m✔\033[32m
-ERROR = \033[31m✖\033[31m
+# -- UTILS ------------------------
 INFO  = \033[36m→\033[36m
-LINE  = -----------------------------------------
+LINE  = ---------------------------
 
-
-# -- TASK ---------------------------------------
+# -- GENERATE KEYSTORE ------------
 # -- Pass: moovie
 # keytool -genkeypair -v -keystore moovie.keystore -alias moovie -keyalg RSA -keysize 2048 -validity 10000
 
