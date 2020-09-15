@@ -2,11 +2,15 @@ import { faCalendarCheck, faGlobeAmericas, faStar } from '@fortawesome/free-soli
 import React, { useState, useEffect } from 'react'
 import { StyleSheet, Text, View } from 'react-native'
 
-import StorageHelper from '../helpers/StorageHelper'
-import { MovieModel } from '../interfaces/MovieModel'
-import { ImageConfigurationModel } from '../interfaces/ImageConfigurationModel'
-import CardMovieInfo from './CardMovieInfo'
-import ImageWithEffect from './ImageWithEffect/ImageWithEffect'
+import StorageHelper from '../../helpers/StorageHelper'
+import { MovieModel } from '../../interfaces/MovieModel'
+import { ImageConfigurationModel } from '../../interfaces/ImageConfigurationModel'
+import CardMovieInfo from './../CardMovieInfo/CardMovieInfo'
+import ImageWithEffect from './../ImageWithEffect/ImageWithEffect'
+
+import {
+  StyledCardContainer
+} from './styles'
 
 interface Props {
   movie: MovieModel
@@ -22,19 +26,21 @@ const CardMovie: React.FC<Props> = (props: Props) => {
   const [thumbSize, setThumbSize] = useState('')
 
   useEffect(() => {
+    let isMounted: boolean = true
     StorageHelper.getObject('imageConfig').then(
       (response: ImageConfigurationModel) => {
-        if (response.images?.base_url) {
+        if (isMounted && response.images?.base_url) {
           setBaseUrl(response.images?.base_url)
           setImageSize(response.images?.poster_sizes[5])
           setThumbSize(response.images?.poster_sizes[0])
         }
       }
     )
+    return () => { isMounted = false }
   })
 
   return (
-    <View style={styles.cardContainer}>
+    <StyledCardContainer>
       <ImageWithEffect
         main={`${baseUrl}/${imageSize}/${props.movie?.poster_path}`}
         thumb={`${baseUrl}/${thumbSize}/${props.movie?.poster_path}`}
@@ -42,14 +48,14 @@ const CardMovie: React.FC<Props> = (props: Props) => {
         aspectRatio={POSTER_ASPECT_RATIO}
       />
       <View style={styles.cardInfo}>
-        <Text 
+        <Text
           style={styles.movieName}
         >
           {props.movie?.title}
         </Text>
         <CardMovieInfo
           icon={faCalendarCheck}
-          date={props.movie?.release_date} 
+          date={props.movie?.release_date}
         />
         <CardMovieInfo
           icon={faGlobeAmericas}
@@ -57,27 +63,16 @@ const CardMovie: React.FC<Props> = (props: Props) => {
         />
         <CardMovieInfo
           icon={faStar}
-          text={props.movie?.vote_average} 
+          text={props.movie?.vote_average}
         />
       </View>
-    </View>
+    </StyledCardContainer>
   )
 }
 
 export default CardMovie
 
 const styles = StyleSheet.create({
-  cardContainer: {
-    backgroundColor: '#111',
-    display: 'flex',
-    flexDirection: 'row',
-    alignItems: 'center',
-    paddingRight: 24,
-    marginBottom: 12,
-    marginTop: 12,
-    borderTopRightRadius: 12,
-    borderBottomRightRadius: 12
-  },
   cardInfo: {
     padding: 24
   },

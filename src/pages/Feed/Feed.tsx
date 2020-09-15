@@ -4,10 +4,14 @@ import { AxiosError } from 'axios'
 
 import { MovieModel } from '../../interfaces/MovieModel'
 import { ApiResponse } from '../../interfaces/ApiResponseModel'
-import CardMovie from '../../components/CardMovie'
+import CardMovie from '../../components/CardMovie/CardMovie'
 import MovieService from '../../services/movie.service'
 
-import { StyledFlatList } from './styles'
+import {
+  StyledTitle,
+  StyledSubtitle,
+  StyledFlatList
+} from './styles'
 
 interface Props {
   navigation: any
@@ -45,6 +49,7 @@ class Feed extends React.Component<Props, State> {
    * and sets the state based on whether it's in the first, the last or the in-between pages
    */
   private async getMovies(page: number = 1): Promise<void> {
+    this.setState({isLoading: true})
     await MovieService.getUpcomingMovies({page: page}).then(
       (response: ApiResponse) => {
         let movies: MovieModel[] = []
@@ -80,10 +85,9 @@ class Feed extends React.Component<Props, State> {
   }
 
   private handleScrolling(): void {
-    // if (!this.state.isLoading) {
-      this.setState({isLoading: true})
+    if (!this.state.isLoading) {
       this.getMovies(this.state.page+1)
-    // }
+    }
   }
 
   private renderItem(movie: MovieModel) {
@@ -99,18 +103,21 @@ class Feed extends React.Component<Props, State> {
   }
 
   render(): Element {
-    let {isLoading, movies} = this.state
+    const {isLoading, movies} = this.state
 
     return (
-      <StyledFlatList
-        data={movies}
-        renderItem={(item: any) => this.renderItem(item.item)}
-        keyExtractor={(item: any) => item.id}
-        onEndReached={() => this.handleScrolling()}
-        onEndReachedThreshold={2}
-        refreshing={isLoading}
-        onRefresh={() => this.refreshFeed()}
-      />
+      <>
+        <StyledTitle>Upcoming</StyledTitle>
+        <StyledFlatList
+          data={movies}
+          renderItem={(item: any) => this.renderItem(item.item)}
+          keyExtractor={(item: any) => item.id}
+          onEndReached={() => this.handleScrolling()}
+          onEndReachedThreshold={5}
+          refreshing={isLoading}
+          onRefresh={() => this.refreshFeed()}
+        />
+      </>
     )
   }
 }

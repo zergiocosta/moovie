@@ -17,7 +17,7 @@ const StyledLabel = styled.Text`
 const StyledSquaresWrapper = styled.View`
   display: flex;
   flex-direction: row;
-  background-color: #333;
+  background-color: #111;
 `
 
 const StyledSquareItem = styled.View`

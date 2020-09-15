@@ -2,7 +2,7 @@ import React from 'react'
 import { Text, View, StyleSheet } from 'react-native'
 import { FontAwesomeIcon } from '@fortawesome/react-native-fontawesome'
 
-import DateHelper from '../helpers/DateHelper'
+import DateHelper from '../../helpers/DateHelper'
 
 interface Props {
   icon: any
@@ -12,18 +12,18 @@ interface Props {
 
 const CardMovieInfo: React.FC<Props> = (props: Props) => {
   const { icon, date, text } = props
-  
+
   let convertedDate: string = ''
   if (date) {
     convertedDate = DateHelper.apiDateToHumanReadableFormat(date)
   }
   return (
-    <View 
+    <View
       style={styles.cardText}
     >
       {(!!text || !!date) &&
         <FontAwesomeIcon
-          color="#eee" 
+          color="#eee"
           icon={ icon }
         />
       }
