@@ -4,12 +4,11 @@ import { AxiosError } from 'axios'
 
 import { MovieModel } from '../../interfaces/MovieModel'
 import { ApiResponse } from '../../interfaces/ApiResponseModel'
-import CardMovie from '../../components/CardMovie/CardMovie'
 import MovieService from '../../services/movie.service'
+import CardMovie from '../../components/CardMovie/CardMovie'
 
 import {
   StyledTitle,
-  StyledSubtitle,
   StyledFlatList
 } from './styles'
 
@@ -40,15 +39,15 @@ class Feed extends React.Component<Props, State> {
     this.handleScrolling = this.handleScrolling.bind(this)
   }
 
-  componentDidMount() {
+  componentDidMount = () => {
     this.getMovies()
   }
 
   /**
-   * it fetches the upcoming movies within the specified page
+   * it fetches the upcoming movies within the specified page number
    * and sets the state based on whether it's in the first, the last or the in-between pages
    */
-  private async getMovies(page: number = 1): Promise<void> {
+  private getMovies = async (page: number = 1): Promise<void> => {
     this.setState({isLoading: true})
     await MovieService.getUpcomingMovies({page: page}).then(
       (response: ApiResponse) => {
@@ -76,24 +75,24 @@ class Feed extends React.Component<Props, State> {
     )
   }
 
-  private goToMovie(movie: MovieModel): void {
+  private goToMovie = (movie: MovieModel): void => {
     this.props.navigation.navigate('Single', { movie: movie })
   }
 
-  private refreshFeed(): void {
+  private refreshFeed = (): void => {
     this.getMovies()
   }
 
-  private handleScrolling(): void {
+  private handleScrolling = (): void => {
     if (!this.state.isLoading) {
       this.getMovies(this.state.page+1)
     }
   }
 
-  private renderItem(movie: MovieModel) {
+  private renderItem = (movie: MovieModel) => {
     return (
       <RectButton
-        underlayColor="#EEEEEE"
+        underlayColor="#666"
         onPress={() => this.goToMovie(movie)}>
         <CardMovie
           movie={movie}
@@ -102,7 +101,7 @@ class Feed extends React.Component<Props, State> {
     )
   }
 
-  render(): Element {
+  render = (): Element => {
     const {isLoading, movies} = this.state
 
     return (
@@ -111,7 +110,7 @@ class Feed extends React.Component<Props, State> {
         <StyledFlatList
           data={movies}
           renderItem={(item: any) => this.renderItem(item.item)}
-          keyExtractor={(item: any) => item.id}
+          keyExtractor={(item: any) => item.id.toString()}
           onEndReached={() => this.handleScrolling()}
           onEndReachedThreshold={5}
           refreshing={isLoading}

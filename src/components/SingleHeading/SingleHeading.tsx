@@ -6,7 +6,7 @@ import StorageHelper from '../../helpers/StorageHelper'
 import { ImageConfigurationModel } from '../../interfaces/ImageConfigurationModel'
 import { MovieModel } from '../../interfaces/MovieModel'
 import ImageWithEffect from './../ImageWithEffect/ImageWithEffect'
-import { Title } from './styles'
+import { StyledTitle } from './styles'
 
 interface Props {
   movie: MovieModel
@@ -40,7 +40,7 @@ const SingleHeading: React.FC<Props> = (props: Props) => {
         width={POSTER_CARD_WIDTH}
         aspectRatio={POSTER_ASPECT_RATIO}
       />
-      <Title>{props.movie?.title}</Title>
+      <StyledTitle>{props.movie?.title}</StyledTitle>
     </View>
   )
 }

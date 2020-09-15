@@ -13,6 +13,21 @@ const StyledCardContainer = styled.View`
   border-right-color: #444;
   border-right-width: 4px;
 `
+
+const StyledCardMovieName = styled.Text`
+  color: #eee;
+  flex: 1;
+  flex-wrap: wrap;
+  flex-shrink: 1;
+  font-size: 24px;
+`
+
+const StyledCardInfo = styled.View`
+  padding: 24px;
+`
+
 export {
-  StyledCardContainer
+  StyledCardContainer,
+  StyledCardMovieName,
+  StyledCardInfo
 }

@@ -1,8 +1,9 @@
 import axios, { AxiosError, AxiosResponse } from 'axios'
+
 import { AppConfig } from '../app.config'
 import { ApiResponse } from '../interfaces/ApiResponseModel'
+import ToastService from './toast.service'
 
-import Toast from 'react-native-simple-toast'
 
 class ApiService {
 
@@ -13,15 +14,15 @@ class ApiService {
     this.setupResponseInterceptor()
   }
 
-  public list(url: string, params?: any): Promise<ApiResponse> {
+  public list = (url: string, params?: any): Promise<ApiResponse> => {
     return axios.get(`${this.root}/${url}`, { params: this.requestOptionsParams(params) })
   }
-  
-  public show(url: string, id: number, params?: any): Promise<ApiResponse> {
+
+  public show = (url: string, id: number, params?: any): Promise<ApiResponse> => {
     return axios.get(`${this.root}/${url}/${id}`, { params: this.requestOptionsParams(params) })
   }
 
-  private requestOptionsParams(params?: any): any {
+  private requestOptionsParams = (params?: any): any => {
     const requestParams = {
       api_key: this.apiKey,
       ...params
@@ -29,11 +30,11 @@ class ApiService {
     return requestParams
   }
 
-  private setupResponseInterceptor(): void {
+  private setupResponseInterceptor = (): void => {
     axios.interceptors.response.use(
       (response: AxiosResponse<ApiResponse>) => response,
       (error: AxiosError) => {
-        Toast.show('Não foi possível carregar o conteúdo')
+        ToastService.show('Error while loading content')
         return Promise.reject(error)
       }
     )

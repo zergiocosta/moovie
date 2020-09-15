@@ -1,8 +1,11 @@
 import React from 'react'
-import { Text, View, StyleSheet } from 'react-native'
 import { FontAwesomeIcon } from '@fortawesome/react-native-fontawesome'
 
 import DateHelper from '../../helpers/DateHelper'
+import {
+  StyledContainer,
+  StyledContent
+} from './styles'
 
 interface Props {
   icon: any
@@ -18,37 +21,17 @@ const CardMovieInfo: React.FC<Props> = (props: Props) => {
     convertedDate = DateHelper.apiDateToHumanReadableFormat(date)
   }
   return (
-    <View
-      style={styles.cardText}
-    >
+    <StyledContainer>
       {(!!text || !!date) &&
         <FontAwesomeIcon
           color="#eee"
           icon={ icon }
         />
       }
-      {!!text && <Text style={styles.iconInfo}>{text}</Text>}
-      {!!date && <Text style={styles.iconInfo}>Release: {convertedDate}</Text>}
-    </View>
+      {!!text && <StyledContent>{text}</StyledContent>}
+      {!!date && <StyledContent>Release: {convertedDate}</StyledContent>}
+    </StyledContainer>
   )
 }
 
 export default CardMovieInfo
-
-const styles = StyleSheet.create({
-  cardText: {
-    marginTop: 8,
-    color: '#eee',
-    display: 'flex',
-    width: '100%',
-    flexDirection: 'column',
-    justifyContent: 'center',
-  },
-  iconInfo: {
-    marginTop: -16,
-    marginLeft: 24,
-    color: '#eee',
-    flex: 1,
-    flexWrap: 'wrap'
-  }
-})

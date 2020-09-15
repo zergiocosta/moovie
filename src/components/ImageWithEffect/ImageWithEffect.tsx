@@ -22,7 +22,7 @@ const ImageWithEffect: React.FC<Props> = (props: Props) => {
       }}
       blurRadius={7}
     >
-      <Image 
+      <Image
         style={[styles.cardImage, {
           aspectRatio: aspectRatio,
           width: width

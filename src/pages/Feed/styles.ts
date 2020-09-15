@@ -10,14 +10,6 @@ const StyledTitle = styled.Text`
   font-weight: bold;
 `
 
-const StyledSubtitle = styled.Text`
-  font-size: 16px;
-  padding-bottom: 12px;
-  padding-horizontal: 26px;
-  background-color: #181818;
-  color: #aaa;
-`
-
 const StyledFlatList = styled.FlatList`
   padding-bottom: 32px;
   background-color: #181818;
@@ -25,6 +17,5 @@ const StyledFlatList = styled.FlatList`
 
 export {
   StyledTitle,
-  StyledSubtitle,
   StyledFlatList
 }

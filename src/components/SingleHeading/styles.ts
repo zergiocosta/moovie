@@ -1,6 +1,6 @@
 import styled from 'styled-components/native'
 
-const Title = styled.Text`
+const StyledTitle = styled.Text`
   font-size: 24px;
   position: absolute;
   bottom: 0;
@@ -11,4 +11,4 @@ const Title = styled.Text`
   width: 100%;
 `
 
-export { Title }
+export { StyledTitle }

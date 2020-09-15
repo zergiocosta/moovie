@@ -1,6 +1,5 @@
 import { faCalendarCheck, faGlobeAmericas, faStar } from '@fortawesome/free-solid-svg-icons'
 import React, { useState, useEffect } from 'react'
-import { StyleSheet, Text, View } from 'react-native'
 
 import StorageHelper from '../../helpers/StorageHelper'
 import { MovieModel } from '../../interfaces/MovieModel'
@@ -9,7 +8,9 @@ import CardMovieInfo from './../CardMovieInfo/CardMovieInfo'
 import ImageWithEffect from './../ImageWithEffect/ImageWithEffect'
 
 import {
-  StyledCardContainer
+  StyledCardMovieName,
+  StyledCardContainer,
+  StyledCardInfo
 } from './styles'
 
 interface Props {
@@ -17,7 +18,6 @@ interface Props {
 }
 
 const CardMovie: React.FC<Props> = (props: Props) => {
-
   const POSTER_ASPECT_RATIO: number = 0.69
   const POSTER_CARD_WIDTH: number = 120
 
@@ -26,17 +26,15 @@ const CardMovie: React.FC<Props> = (props: Props) => {
   const [thumbSize, setThumbSize] = useState('')
 
   useEffect(() => {
-    let isMounted: boolean = true
     StorageHelper.getObject('imageConfig').then(
       (response: ImageConfigurationModel) => {
-        if (isMounted && response.images?.base_url) {
+        if (response.images?.base_url) {
           setBaseUrl(response.images?.base_url)
           setImageSize(response.images?.poster_sizes[5])
           setThumbSize(response.images?.poster_sizes[0])
         }
       }
     )
-    return () => { isMounted = false }
   })
 
   return (
@@ -47,12 +45,10 @@ const CardMovie: React.FC<Props> = (props: Props) => {
         width={POSTER_CARD_WIDTH}
         aspectRatio={POSTER_ASPECT_RATIO}
       />
-      <View style={styles.cardInfo}>
-        <Text
-          style={styles.movieName}
-        >
+      <StyledCardInfo>
+        <StyledCardMovieName>
           {props.movie?.title}
-        </Text>
+        </StyledCardMovieName>
         <CardMovieInfo
           icon={faCalendarCheck}
           date={props.movie?.release_date}
@@ -65,22 +61,9 @@ const CardMovie: React.FC<Props> = (props: Props) => {
           icon={faStar}
           text={props.movie?.vote_average}
         />
-      </View>
+      </StyledCardInfo>
     </StyledCardContainer>
   )
 }
 
 export default CardMovie
-
-const styles = StyleSheet.create({
-  cardInfo: {
-    padding: 24
-  },
-  movieName: {
-    color: '#eee',
-    flex: 1,
-    flexWrap: 'wrap',
-    flexShrink: 1,
-    fontSize: 24
-  }
-})

@@ -13,16 +13,16 @@ import Single from './pages/Single/Single'
 
 class App extends React.Component {
 
-  componentDidMount() {
+  componentDidMount = () => {
     this.setupImageConfig()
   }
 
-  private async setupImageConfig(): Promise<void> {
+  private setupImageConfig = async (): Promise<void> => {
     const hasLocalConfig: ImageConfigurationModel | boolean = await this.hasLocalImageConfig()
     !hasLocalConfig && this.getImageConfigFromApi()
   }
 
-  private async hasLocalImageConfig(): Promise<ImageConfigurationModel | boolean> {
+  private hasLocalImageConfig = async (): Promise<ImageConfigurationModel | boolean> => {
     let hasLocalConfig = false
     await StorageHelper.getObject('imageConfig').then(
       res => {
@@ -32,7 +32,7 @@ class App extends React.Component {
     return hasLocalConfig
   }
 
-  private getImageConfigFromApi(): void {
+  private getImageConfigFromApi = (): void => {
     ImageConfigService.getImageConfig().then(
       (response: ApiResponse) => {
         (response.data) && this.setLocalImageConfig(response.data)
@@ -40,11 +40,11 @@ class App extends React.Component {
     )
   }
 
-  private setLocalImageConfig(config: ImageConfigurationModel): void {
+  private setLocalImageConfig = (config: ImageConfigurationModel): void => {
     StorageHelper.setObject('imageConfig', config)
   }
 
-  render() {
+  render = () => {
     const Stack = createStackNavigator()
 
     return (

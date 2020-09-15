@@ -1,12 +1,6 @@
 import React from 'react'
-import { View, Text } from 'react-native'
-
-import DateHelper from '../../helpers/DateHelper'
-import { MovieModel } from '../../interfaces/MovieModel'
-import MovieService from '../../services/movie.service'
-import { ApiResponse } from '../../interfaces/ApiResponseModel'
-import SingleHeading from '../../components/SingleHeading/SingleHeading'
-import Tag from '../../components/Tag/Tag'
+import { View } from 'react-native'
+import { ScrollView } from 'react-native-gesture-handler'
 import {
   faChartLine,
   faGlobeAmericas,
@@ -14,6 +8,13 @@ import {
   faTags
 } from '@fortawesome/free-solid-svg-icons'
 import { FontAwesomeIcon } from '@fortawesome/react-native-fontawesome'
+
+import DateHelper from '../../helpers/DateHelper'
+import { MovieModel } from '../../interfaces/MovieModel'
+import { ApiResponse } from '../../interfaces/ApiResponseModel'
+import MovieService from '../../services/movie.service'
+import SingleHeading from '../../components/SingleHeading/SingleHeading'
+import Tag from '../../components/Tag/Tag'
 
 import {
   StyledGenresWrapper,
@@ -26,7 +27,6 @@ import {
   StyledContentTagline,
   StyledSingleInfoWrapper
 } from './styles'
-import { ScrollView } from 'react-native-gesture-handler'
 
 interface Props {
   navigation: any
@@ -47,7 +47,7 @@ class Single extends React.Component<Props, State> {
     this.setInitialState(props.route.params.movie)
   }
 
-  private setInitialState(movie: MovieModel): void {
+  private setInitialState = (movie: MovieModel): void => {
     this.state = {
       movie: movie,
       release_date: DateHelper.apiDateToHumanReadableFormat(movie.release_date),
@@ -55,12 +55,12 @@ class Single extends React.Component<Props, State> {
     }
   }
 
-  componentDidMount() {
+  componentDidMount = () => {
     const movieId: number = this.props.route.params.movie.id
     this.getMovieById(movieId)
   }
 
-  private async getMovieById(movieId: number): Promise<void> {
+  private getMovieById = async (movieId: number): Promise<void> => {
     MovieService.getMovieById(movieId).then(
       (response: ApiResponse) => {
         this.setState({
@@ -71,38 +71,38 @@ class Single extends React.Component<Props, State> {
     )
   }
 
-  render(): Element {
+  render = (): Element => {
     return (
       <ScrollView>
         <SingleHeading movie={this.state.movie!} />
 
-        <StyledSquaresWrapper>
-          <StyledSquareItem>
-            {!!this.state.movie?.production_countries &&
-              <View>
-                <FontAwesomeIcon
-                  style={{color: '#eee'}}
-                  icon={faGlobeAmericas}
-                />
-                <StyledSquareText>{this.state.movie?.production_countries[0]?.iso_3166_1}</StyledSquareText>
-              </View>
-            }
-          </StyledSquareItem>
-          <StyledSquareItemBordered>
-            <FontAwesomeIcon
-              style={{color: '#eee'}}
-              icon={faChartLine}
-            />
-            <StyledSquareText>{this.state.movie?.vote_count}</StyledSquareText>
-          </StyledSquareItemBordered>
-          <StyledSquareItem>
-            <FontAwesomeIcon
-              style={{color: '#eee'}}
-              icon={faStar}
-            />
-            <StyledSquareText>{this.state.movie?.vote_average}</StyledSquareText>
-          </StyledSquareItem>
-        </StyledSquaresWrapper>
+          <StyledSquaresWrapper>
+            <StyledSquareItem>
+              {!!this.state.movie?.production_countries &&
+                <View>
+                  <FontAwesomeIcon
+                    style={{color: '#eee'}}
+                    icon={faGlobeAmericas}
+                  />
+                  <StyledSquareText>{this.state.movie?.production_countries[0]?.iso_3166_1}</StyledSquareText>
+                </View>
+              }
+            </StyledSquareItem>
+            <StyledSquareItemBordered>
+              <FontAwesomeIcon
+                style={{color: '#eee'}}
+                icon={faChartLine}
+              />
+              <StyledSquareText>{this.state.movie?.vote_count}</StyledSquareText>
+            </StyledSquareItemBordered>
+            <StyledSquareItem>
+              <FontAwesomeIcon
+                style={{color: '#eee'}}
+                icon={faStar}
+              />
+              <StyledSquareText>{this.state.movie?.vote_average}</StyledSquareText>
+            </StyledSquareItem>
+          </StyledSquaresWrapper>
 
         {!!this.state.movie?.genres &&
           <StyledGenresWrapper>
