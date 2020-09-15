@@ -11,9 +11,9 @@ LINE  = -----------------------------------------
 # keytool -genkeypair -v -keystore moovie.keystore -alias moovie -keyalg RSA -keysize 2048 -validity 10000
 
 run-android:
-	@echo " $(INFO) Rodando no dispositivo Android"
+	@echo " $(INFO) Running on Android"
 	@npx react-native run-android
 
 run-ios:
-	@echo " $(INFO) Rodando no dispositivo iOS"
+	@echo " $(INFO) Running on iOS"
 	@npx react-native run-ios
