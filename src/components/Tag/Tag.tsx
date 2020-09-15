@@ -13,19 +13,28 @@ interface Props {
 const Tag: React.FC<Props> = (props: Props) => {
   const { name } = props
   const opacity: any = useRef( new Animated.Value(0) ).current
+  const posY: any = useRef( new Animated.Value(8) ).current
 
   useEffect(() => {
     Animated.timing(opacity, {
       toValue: 1,
-      duration: 1000,
+      duration: 500,
       easing: Easing.ease,
     }).start()
-  }, [opacity])
+    Animated.timing(posY, {
+      toValue: 0,
+      duration: 700,
+      easing: Easing.linear,
+    }).start()
+  }, [posY])
 
   return (
     <Animated.View
       style={{
-        opacity: opacity
+        opacity: opacity,
+        transform: [
+          {translateY: posY}
+        ]
       }}>
       <StyledTag>{name}</StyledTag>
     </Animated.View>

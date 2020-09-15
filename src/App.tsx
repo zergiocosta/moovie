@@ -67,10 +67,11 @@ class App extends React.Component {
             component={Single}
             options={{
               title: 'moovie',
+              // headerShown: false,
               headerStyle: {
                 backgroundColor: '#111',
               },
-              headerTintColor: '#eee',
+              headerTintColor: '#eee'
             }}
           />
         </Stack.Navigator>

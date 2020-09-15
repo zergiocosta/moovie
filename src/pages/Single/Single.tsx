@@ -1,5 +1,5 @@
 import React from 'react'
-import { View } from 'react-native'
+import { StatusBar, View } from 'react-native'
 import { ScrollView } from 'react-native-gesture-handler'
 import {
   faChartLine,
@@ -73,6 +73,8 @@ class Single extends React.Component<Props, State> {
 
   render = (): Element => {
     return (
+      <>
+        <StatusBar barStyle="light-content" />
       <ScrollView>
         <SingleHeading movie={this.state.movie!} />
 
@@ -106,7 +108,11 @@ class Single extends React.Component<Props, State> {
 
         {!!this.state.movie?.genres &&
           <StyledGenresWrapper>
-            <FontAwesomeIcon size={32} icon={faTags} />
+            <FontAwesomeIcon
+              size={32}
+              icon={faTags}
+              style={{color: '#333',marginRight: 8}}
+            />
             {this.state.movie?.genres.map((item: any) => {
               return <Tag key={item.id} name={item.name} />
             })}
@@ -132,11 +138,11 @@ class Single extends React.Component<Props, State> {
           {!!this.state.movie?.production_companies &&
             <>
               <StyledLabel>Production:</StyledLabel>
-              <StyledContentText>
+              <View>
                 {this.state.movie?.production_companies.map((company) => {
                   return <StyledContentText key={company.id}>{company.name}</StyledContentText>
                 })}
-              </StyledContentText>
+              </View>
             </>
           }
 
@@ -147,6 +153,7 @@ class Single extends React.Component<Props, State> {
 
         </StyledSingleInfoWrapper>
       </ScrollView>
+      </>
     )
   }
 }

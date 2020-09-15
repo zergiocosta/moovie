@@ -1,5 +1,10 @@
 import React from 'react'
-import { Image, ImageBackground, StyleSheet } from 'react-native'
+import {
+  Image,
+  ImageBackground,
+  SafeAreaView,
+  StyleSheet
+} from 'react-native'
 
 interface Props {
   main: string
@@ -12,6 +17,7 @@ const ImageWithEffect: React.FC<Props> = (props: Props) => {
   const {main, thumb, width, aspectRatio} = props
 
   return (
+    <SafeAreaView>
     <ImageBackground
       style={[styles.cardImage, {
         aspectRatio: aspectRatio,
@@ -32,6 +38,7 @@ const ImageWithEffect: React.FC<Props> = (props: Props) => {
         }}
       />
     </ImageBackground>
+    </SafeAreaView>
   )
 }
 
