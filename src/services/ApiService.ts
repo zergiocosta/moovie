@@ -1,8 +1,8 @@
 import axios, { AxiosError, AxiosResponse } from 'axios'
 
-import { AppConfig } from '../app.config'
+import { AppConfig } from '../AppConfig'
 import { ApiResponse } from '../interfaces/ApiResponseModel'
-import ToastService from './toast.service'
+import ToastService from './ToastService'
 
 
 class ApiService {

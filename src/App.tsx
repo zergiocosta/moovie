@@ -7,7 +7,7 @@ import { createStackNavigator } from '@react-navigation/stack'
 import StorageHelper from './helpers/StorageHelper'
 import { ApiResponse } from './interfaces/ApiResponseModel'
 import { ImageConfigurationModel } from './interfaces/ImageConfigurationModel'
-import ImageConfigService from './services/imageConfig.service'
+import ImageConfigService from './services/ImageConfigService'
 import Feed from './pages/Feed/Feed'
 import Single from './pages/Single/Single'
 

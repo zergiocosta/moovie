@@ -4,7 +4,7 @@ import { AxiosError } from 'axios'
 
 import { MovieModel } from '../../interfaces/MovieModel'
 import { ApiResponse } from '../../interfaces/ApiResponseModel'
-import MovieService from '../../services/movie.service'
+import MovieService from '../../services/MovieService'
 import CardMovie from '../../components/CardMovie/CardMovie'
 
 import {

@@ -12,7 +12,7 @@ import { FontAwesomeIcon } from '@fortawesome/react-native-fontawesome'
 import DateHelper from '../../helpers/DateHelper'
 import { MovieModel } from '../../interfaces/MovieModel'
 import { ApiResponse } from '../../interfaces/ApiResponseModel'
-import MovieService from '../../services/movie.service'
+import MovieService from '../../services/MovieService'
 import SingleHeading from '../../components/SingleHeading/SingleHeading'
 import Tag from '../../components/Tag/Tag'
 
