@@ -80,7 +80,9 @@ class Feed extends React.Component<Props, State> {
   }
 
   private refreshFeed = (): void => {
-    this.getMovies()
+    if (!this.state.isLoading) {
+      this.getMovies()
+    }
   }
 
   private handleScrolling = (): void => {
@@ -112,9 +114,10 @@ class Feed extends React.Component<Props, State> {
           renderItem={(item: any) => this.renderItem(item.item)}
           keyExtractor={(item: any) => item.id.toString()}
           onEndReached={() => this.handleScrolling()}
-          onEndReachedThreshold={5}
+          onEndReachedThreshold={0.4}
           refreshing={isLoading}
           onRefresh={() => this.refreshFeed()}
+          onMomentumScrollBegin={() => { this.setState({isLoading: false}) }}
         />
       </>
     )

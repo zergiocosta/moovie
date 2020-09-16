@@ -17,6 +17,7 @@ const StyledCardContainer = styled.View`
 const StyledCardMovieName = styled.Text`
   color: #eee;
   flex: 1;
+  flex-basis: 0;
   flex-wrap: wrap;
   flex-shrink: 1;
   font-size: 24px;
@@ -24,6 +25,7 @@ const StyledCardMovieName = styled.Text`
 
 const StyledCardInfo = styled.View`
   padding: 24px;
+  max-width: 95%;
 `
 
 export {
