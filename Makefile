@@ -11,17 +11,17 @@ run-android:
 	@npx react-native run-android
 
 run-android-release:
-  @echo " $(INFO) Running Android release build"
-  @npx npx react-native run-android --variant=release
+	@echo " $(INFO) Running Android release build"
+	@npx npx react-native run-android --variant=release
 
 build-android:
-  @echo " $(INFO) Building Android release binary"
-  @cd android && ./gradlew assembleRelease
+	@echo " $(INFO) Building Android release binary"
+	@cd android && ./gradlew assembleRelease
 
 run-ios:
 	@echo " $(INFO) Running on iOS"
 	@npx react-native run-ios
 
 build-ios:
-  @echo " $(INFO) Building iOS release binary"
-  @npx react-native bundle --entry-file index.js --platform ios --dev false --bundle-output ios/main.jsbundle --assets-dest ios
+	@echo " $(INFO) Building iOS release binary"
+	@npx react-native bundle --entry-file index.js --platform ios --dev false --bundle-output ios/main.jsbundle --assets-dest ios
