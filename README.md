@@ -19,7 +19,7 @@ This document has every needed information in order to get the local environment
 
 > **IMPORTANT:** Read the [Rules](#rules) of the development.
 
-> **IMPORTANT:** This app connects to a third party API. It's really important for it be working properly so the app could show its funcionalities. Postman collection and environment available in `./misc/api/`
+> **IMPORTANT:** This app connects to a third party API. It's really important for it to be working properly so the app could show its functionalities. Postman collection and environment available in `./misc/postman-config/`
 
 
 ## [Requirements](#requirements)
@@ -64,6 +64,8 @@ In order to release make release builds please use the following commands:
     ├── __tests__/
     ├── android/
     ├── ios/
+    ├── misc/
+    │   └── postman-config/ 
     └── src/
         ├── components/
         │   ├── CardMovie/
