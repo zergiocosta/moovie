@@ -14,17 +14,18 @@ import { MovieModel } from '../../interfaces/MovieModel'
 import { ApiResponse } from '../../interfaces/ApiResponseModel'
 import MovieService from '../../services/MovieService'
 import SingleHeading from '../../components/SingleHeading/SingleHeading'
+import TextSm from '../../components/TextSm/TextSm'
+import TextMd from '../../components/TextMd/TextMd'
+import TextLg from '../../components/TextLg/TextLg'
 import Tag from '../../components/Tag/Tag'
+import ProductionCompany from '../../components/ProductionCompany/ProductionCompany'
 
 import {
   StyledGenresWrapper,
-  StyledLabel,
   StyledSquaresWrapper,
   StyledSquareItem,
   StyledSquareItemBordered,
   StyledSquareText,
-  StyledContentText,
-  StyledContentTagline,
   StyledSingleInfoWrapper
 } from './styles'
 
@@ -72,87 +73,84 @@ class Single extends React.Component<Props, State> {
   }
 
   render = (): Element => {
+    const movieTagLine = this.state.movie?.title+" - "+this.state.movie?.tagline
+
     return (
       <>
         <StatusBar barStyle="light-content" />
-      <ScrollView>
-        <SingleHeading movie={this.state.movie!} />
+        <ScrollView>
+          <SingleHeading movie={this.state.movie!} />
 
-          <StyledSquaresWrapper>
-            <StyledSquareItem>
-              {!!this.state.movie?.production_countries &&
-                <View>
-                  <FontAwesomeIcon
-                    style={{color: '#eee'}}
-                    icon={faGlobeAmericas}
-                  />
-                  <StyledSquareText>{this.state.movie?.production_countries[0]?.iso_3166_1}</StyledSquareText>
-                </View>
-              }
-            </StyledSquareItem>
-            <StyledSquareItemBordered>
+            <StyledSquaresWrapper>
+              <StyledSquareItem>
+                {!!this.state.movie?.production_countries &&
+                  <View>
+                    <FontAwesomeIcon
+                      style={{color: '#eee'}}
+                      icon={faGlobeAmericas}
+                    />
+                    <StyledSquareText>{this.state.movie?.production_countries[0]?.iso_3166_1}</StyledSquareText>
+                  </View>
+                }
+              </StyledSquareItem>
+              <StyledSquareItemBordered>
+                <FontAwesomeIcon
+                  style={{color: '#eee'}}
+                  icon={faChartLine}
+                />
+                <StyledSquareText>{this.state.movie?.vote_count}</StyledSquareText>
+              </StyledSquareItemBordered>
+              <StyledSquareItem>
+                <FontAwesomeIcon
+                  style={{color: '#eee'}}
+                  icon={faStar}
+                />
+                <StyledSquareText>{this.state.movie?.vote_average}</StyledSquareText>
+              </StyledSquareItem>
+            </StyledSquaresWrapper>
+
+          {!!this.state.movie?.genres &&
+            <StyledGenresWrapper>
               <FontAwesomeIcon
-                style={{color: '#eee'}}
-                icon={faChartLine}
+                size={32}
+                icon={faTags}
+                style={{color: '#333',marginRight: 8}}
               />
-              <StyledSquareText>{this.state.movie?.vote_count}</StyledSquareText>
-            </StyledSquareItemBordered>
-            <StyledSquareItem>
-              <FontAwesomeIcon
-                style={{color: '#eee'}}
-                icon={faStar}
-              />
-              <StyledSquareText>{this.state.movie?.vote_average}</StyledSquareText>
-            </StyledSquareItem>
-          </StyledSquaresWrapper>
-
-        {!!this.state.movie?.genres &&
-          <StyledGenresWrapper>
-            <FontAwesomeIcon
-              size={32}
-              icon={faTags}
-              style={{color: '#333',marginRight: 8}}
-            />
-            {this.state.movie?.genres.map((item: any) => {
-              return <Tag key={item.id} name={item.name} />
-            })}
-          </StyledGenresWrapper>
-        }
-
-        <StyledSingleInfoWrapper>
-          {!!this.state.movie?.tagline &&
-            <StyledContentTagline>
-              {this.state.movie?.title} - {this.state.movie?.tagline}
-            </StyledContentTagline>
+              {this.state.movie?.genres.map((item: any) => {
+                return <Tag key={item.id} name={item.name} />
+              })}
+            </StyledGenresWrapper>
           }
 
-          {!!this.state.movie?.overview &&
-            <>
-              <StyledLabel>Overview:</StyledLabel>
-              <StyledContentText>
-                {this.state.movie?.overview}
-              </StyledContentText>
-            </>
-          }
+          <StyledSingleInfoWrapper>
 
-          {!!this.state.movie?.production_companies &&
-            <>
-              <StyledLabel>Production:</StyledLabel>
-              <View>
-                {this.state.movie?.production_companies.map((company) => {
-                  return <StyledContentText key={company.id}>{company.name}</StyledContentText>
-                })}
-              </View>
-            </>
-          }
+            {!!this.state.movie?.tagline &&
+              <TextLg text={movieTagLine} />
+            }
 
-          <StyledLabel>Release date:</StyledLabel>
-          <StyledContentText>
-            {this.state.release_date}
-          </StyledContentText>
+            {!!this.state.movie?.overview &&
+              <>
+                <TextSm text="Overview:" />
+                <TextMd text={this.state.movie?.overview} />
+              </>
+            }
 
-        </StyledSingleInfoWrapper>
-      </ScrollView>
+            <TextSm text="Release date:" />
+            <TextMd text={this.state.release_date} />
+
+            {!!this.state.movie?.production_companies &&
+              <>
+                <TextSm text="Production:" />
+                <ScrollView horizontal={true}>
+                  {this.state.movie?.production_companies.map((company) => {
+                    return <ProductionCompany key={company.id} company={company} />
+                  })}
+                </ScrollView>
+              </>
+            }
+
+          </StyledSingleInfoWrapper>
+        </ScrollView>
       </>
     )
   }

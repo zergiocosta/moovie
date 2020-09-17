@@ -9,11 +9,6 @@ const StyledGenresWrapper = styled.View`
   margin-top: 24px;
 `
 
-const StyledLabel = styled.Text`
-  margin-bottom: 12px;
-  font-size: 14px;
-`
-
 const StyledSquaresWrapper = styled.View`
   display: flex;
   flex-direction: row;
@@ -44,24 +39,11 @@ const StyledSingleInfoWrapper = styled.View`
   padding-vertical: 24px;
 `
 
-const StyledContentText = styled.Text`
-  font-size: 18px;
-  margin-bottom: 32px;
-`
-
-const StyledContentTagline = styled.Text`
-  font-size: 24px;
-  margin-bottom: 24px;
-`
-
 export {
   StyledGenresWrapper,
-  StyledLabel,
   StyledSquaresWrapper,
   StyledSquareItem,
   StyledSquareItemBordered,
   StyledSquareText,
-  StyledContentText,
-  StyledContentTagline,
   StyledSingleInfoWrapper
 }

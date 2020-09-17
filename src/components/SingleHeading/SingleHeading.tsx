@@ -6,6 +6,8 @@ import StorageHelper from '../../helpers/StorageHelper'
 import { ImageConfigurationModel } from '../../interfaces/ImageConfigurationModel'
 import { MovieModel } from '../../interfaces/MovieModel'
 import ImageWithEffect from './../ImageWithEffect/ImageWithEffect'
+import BounceInUpAnim from '../BounceInUpAnim/BounceInUpAnim'
+
 import { StyledTitle } from './styles'
 
 interface Props {
@@ -40,7 +42,9 @@ const SingleHeading: React.FC<Props> = (props: Props) => {
         width={POSTER_CARD_WIDTH}
         aspectRatio={POSTER_ASPECT_RATIO}
       />
-      <StyledTitle>{props.movie?.title}</StyledTitle>
+      <BounceInUpAnim>
+        <StyledTitle>{props.movie?.title}</StyledTitle>
+      </BounceInUpAnim>
     </View>
   )
 }
