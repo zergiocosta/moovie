@@ -53,7 +53,7 @@ Everything setup. Enjoy:
 
 In order to release make release builds please use the following commands:
 - **Build Android release binary**: `$ make build-android`
-- **Build iOS release binary**: `$ make build-ios`
+- **Build iOS release xcode project**: `$ make build-ios`
 
 
 ## [Project sctructure](#project-structure)
