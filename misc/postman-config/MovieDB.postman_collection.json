@@ -1,0 +1,109 @@
+{
+	"info": {
+		"_postman_id": "ab5e6a3d-2a60-4e29-9479-4c52ed8644d2",
+		"name": "MovieDB",
+		"schema": "https://schema.getpostman.com/json/collection/v2.1.0/collection.json"
+	},
+	"item": [
+		{
+			"name": "Upcoming Movies",
+			"request": {
+				"method": "GET",
+				"header": [],
+				"url": {
+					"raw": "{{base_url}}/movie/upcoming?api_key={{api_key}}",
+					"host": [
+						"{{base_url}}"
+					],
+					"path": [
+						"movie",
+						"upcoming"
+					],
+					"query": [
+						{
+							"key": "api_key",
+							"value": "{{api_key}}"
+						}
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "Configuration",
+			"request": {
+				"method": "GET",
+				"header": [],
+				"url": {
+					"raw": "{{base_url}}/configuration?api_key={{api_key}}",
+					"host": [
+						"{{base_url}}"
+					],
+					"path": [
+						"configuration"
+					],
+					"query": [
+						{
+							"key": "api_key",
+							"value": "{{api_key}}"
+						}
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "Single",
+			"request": {
+				"method": "GET",
+				"header": [],
+				"url": {
+					"raw": "{{base_url}}/movie/:movie_id?api_key={{api_key}}",
+					"host": [
+						"{{base_url}}"
+					],
+					"path": [
+						"movie",
+						":movie_id"
+					],
+					"query": [
+						{
+							"key": "api_key",
+							"value": "{{api_key}}"
+						}
+					],
+					"variable": [
+						{
+							"key": "movie_id",
+							"value": "539885"
+						}
+					]
+				}
+			},
+			"response": []
+		}
+	],
+	"event": [
+		{
+			"listen": "prerequest",
+			"script": {
+				"id": "39c8ee4c-8d96-4943-ab08-057dd2512528",
+				"type": "text/javascript",
+				"exec": [
+					""
+				]
+			}
+		},
+		{
+			"listen": "test",
+			"script": {
+				"id": "80f11e9a-19d8-4c98-9b8d-433f99f0687b",
+				"type": "text/javascript",
+				"exec": [
+					""
+				]
+			}
+		}
+	],
+	"protocolProfileBehavior": {}
+}
