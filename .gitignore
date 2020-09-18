@@ -29,6 +29,7 @@ build/
 local.properties
 *.iml
 java_pid3966.hprof
+*.hprof
 
 # Visual Studio Code
 #
