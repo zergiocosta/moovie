@@ -1,17 +1,14 @@
-import React from 'react'
-import { View } from 'react-native'
+import React, { useEffect, useState } from 'react'
+import { Image, StyleSheet } from 'react-native'
 
 import { ProductionCompanyModel } from '../../interfaces/ProductionCompanyModel'
-import ImageWithEffect from '../ImageWithEffect/ImageWithEffect'
+import { ImageConfigurationModel } from '../../interfaces/ImageConfigurationModel'
 import StorageHelper from '../../helpers/StorageHelper'
 
-import { StyledLabel } from './styles'
-import { useState } from 'react'
-import { ImageConfigurationModel } from '../../interfaces/ImageConfigurationModel'
-import { useEffect } from 'react'
-import { ImageBackground } from 'react-native'
-import { StyleSheet } from 'react-native'
-import { Image } from 'react-native'
+import {
+  StyledCompanyWrapper,
+  StyledLabel
+} from './styles'
 
 interface Props {
   company: ProductionCompanyModel
@@ -40,7 +37,7 @@ const ProductionCompany: React.FC<Props> = (props: Props) => {
   return (
     <>
       {!!company.logo_path &&
-        <View style={styles.companyWrapper}>
+        <StyledCompanyWrapper>
           <Image
             style={[styles.companyImage, {
               aspectRatio: IMAGE_RATIO,
@@ -51,7 +48,7 @@ const ProductionCompany: React.FC<Props> = (props: Props) => {
             }}
           />
           <StyledLabel>{company.name}</StyledLabel>
-        </View>
+        </StyledCompanyWrapper>
       }
     </>
   )
@@ -60,12 +57,6 @@ const ProductionCompany: React.FC<Props> = (props: Props) => {
 export default ProductionCompany
 
 const styles = StyleSheet.create({
-  companyWrapper: {
-    display: 'flex',
-    alignItems: 'center',
-    justifyContent: 'center',
-    marginBottom: 75
-  },
   companyImage: {
     width: '100%',
     resizeMode: 'contain',

@@ -28,6 +28,7 @@ import {
   StyledSquareText,
   StyledSingleInfoWrapper
 } from './styles'
+import { ProductionCompanyModel } from '../../interfaces/ProductionCompanyModel'
 
 interface Props {
   navigation: any
@@ -81,33 +82,33 @@ class Single extends React.Component<Props, State> {
         <ScrollView>
           <SingleHeading movie={this.state.movie!} />
 
-            <StyledSquaresWrapper>
-              <StyledSquareItem>
-                {!!this.state.movie?.production_countries &&
-                  <View>
-                    <FontAwesomeIcon
-                      style={{color: '#eee'}}
-                      icon={faGlobeAmericas}
-                    />
-                    <StyledSquareText>{this.state.movie?.production_countries[0]?.iso_3166_1}</StyledSquareText>
-                  </View>
-                }
-              </StyledSquareItem>
-              <StyledSquareItemBordered>
-                <FontAwesomeIcon
-                  style={{color: '#eee'}}
-                  icon={faChartLine}
-                />
-                <StyledSquareText>{this.state.movie?.vote_count}</StyledSquareText>
-              </StyledSquareItemBordered>
-              <StyledSquareItem>
-                <FontAwesomeIcon
-                  style={{color: '#eee'}}
-                  icon={faStar}
-                />
-                <StyledSquareText>{this.state.movie?.vote_average}</StyledSquareText>
-              </StyledSquareItem>
-            </StyledSquaresWrapper>
+          <StyledSquaresWrapper>
+            <StyledSquareItem>
+              {!!this.state.movie?.production_countries &&
+                <View>
+                  <FontAwesomeIcon
+                    style={{color: '#eee'}}
+                    icon={faGlobeAmericas}
+                  />
+                  <StyledSquareText>{this.state.movie?.production_countries[0]?.iso_3166_1}</StyledSquareText>
+                </View>
+              }
+            </StyledSquareItem>
+            <StyledSquareItemBordered>
+              <FontAwesomeIcon
+                style={{color: '#eee'}}
+                icon={faChartLine}
+              />
+              <StyledSquareText>{this.state.movie?.vote_count}</StyledSquareText>
+            </StyledSquareItemBordered>
+            <StyledSquareItem>
+              <FontAwesomeIcon
+                style={{color: '#eee'}}
+                icon={faStar}
+              />
+              <StyledSquareText>{this.state.movie?.vote_average}</StyledSquareText>
+            </StyledSquareItem>
+          </StyledSquaresWrapper>
 
           {!!this.state.movie?.genres &&
             <StyledGenresWrapper>
@@ -142,7 +143,7 @@ class Single extends React.Component<Props, State> {
               <>
                 <TextSm text="Production:" />
                 <ScrollView horizontal={true}>
-                  {this.state.movie?.production_companies.map((company) => {
+                  {this.state.movie?.production_companies.map((company: ProductionCompanyModel) => {
                     return <ProductionCompany key={company.id} company={company} />
                   })}
                 </ScrollView>

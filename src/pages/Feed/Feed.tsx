@@ -1,16 +1,18 @@
 import * as React from 'react'
-import { RectButton } from 'react-native-gesture-handler'
+import { TouchableOpacity } from 'react-native-gesture-handler'
 import { AxiosError } from 'axios'
 
 import { MovieModel } from '../../interfaces/MovieModel'
 import { ApiResponse } from '../../interfaces/ApiResponseModel'
 import MovieService from '../../services/MovieService'
 import CardMovie from '../../components/CardMovie/CardMovie'
+import FadeInUpAnim from '../../components/FadeInUpAnim/FadeInUpAnim'
 
 import {
   StyledTitle,
   StyledFlatList
 } from './styles'
+import { View } from 'react-native'
 
 interface Props {
   navigation: any
@@ -93,13 +95,15 @@ class Feed extends React.Component<Props, State> {
 
   private renderItem = (movie: MovieModel) => {
     return (
-      <RectButton
-        underlayColor="#666"
-        onPress={() => this.goToMovie(movie)}>
-        <CardMovie
-          movie={movie}
-        />
-      </RectButton>
+      <TouchableOpacity
+        onPress={() => this.goToMovie(movie)}
+      >
+        <FadeInUpAnim>
+          <CardMovie
+            movie={movie}
+          />
+        </FadeInUpAnim>
+      </TouchableOpacity>
     )
   }
 
@@ -107,19 +111,19 @@ class Feed extends React.Component<Props, State> {
     const {isLoading, movies} = this.state
 
     return (
-      <>
+      <View>
         <StyledTitle>Upcoming</StyledTitle>
         <StyledFlatList
           data={movies}
           renderItem={(item: any) => this.renderItem(item.item)}
           keyExtractor={(item: any) => item.id.toString()}
           onEndReached={() => this.handleScrolling()}
-          onEndReachedThreshold={0.4}
+          onEndReachedThreshold={0.5}
           refreshing={isLoading}
           onRefresh={() => this.refreshFeed()}
           onMomentumScrollBegin={() => { this.setState({isLoading: false}) }}
         />
-      </>
+      </View>
     )
   }
 }

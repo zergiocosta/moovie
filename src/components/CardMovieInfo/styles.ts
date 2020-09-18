@@ -4,6 +4,8 @@ const StyledContainer = styled.View`
   margin-top: 8px
   color: #eee;
   display: flex;
+  flex: 1;
+  flexWrap: wrap;
   width: 100%;
   flex-direction: column;
   justify-content: center;

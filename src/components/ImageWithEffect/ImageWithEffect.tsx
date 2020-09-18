@@ -18,26 +18,26 @@ const ImageWithEffect: React.FC<Props> = (props: Props) => {
 
   return (
     <SafeAreaView>
-    <ImageBackground
-      style={[styles.cardImage, {
-        aspectRatio: aspectRatio,
-        width: width
-      }]}
-      source={{
-        uri: thumb,
-      }}
-      blurRadius={7}
-    >
-      <Image
+      <ImageBackground
         style={[styles.cardImage, {
           aspectRatio: aspectRatio,
           width: width
         }]}
         source={{
-          uri: main,
+          uri: thumb,
         }}
-      />
-    </ImageBackground>
+        blurRadius={7}
+      >
+        <Image
+          style={[styles.cardImage, {
+            aspectRatio: aspectRatio,
+            width: width
+          }]}
+          source={{
+            uri: main,
+          }}
+        />
+      </ImageBackground>
     </SafeAreaView>
   )
 }

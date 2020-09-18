@@ -24,7 +24,7 @@ This document has every needed information in order to get the local environment
 
 ## [Requirements](#requirements)
 
-To fully run the project you must have the following installed:
+To fully run the project on both iOS and Android you must have the following installed:
 
 - [XCode & CocoaPods]()
 - [Android Studio]()
@@ -34,7 +34,7 @@ To fully run the project you must have the following installed:
 
 ## [Init](#init)
 
-The first step is clonning the repo:
+The first step is to clone the repo from GitHub:
 
 - **Clone it**: `$ git clone https://github.com/zergiocosta/moovie.git`
 - **cd into it:** `$ cd moovie`
@@ -68,11 +68,17 @@ In order to release make release builds please use the following commands:
     │   └── postman-config/ 
     └── src/
         ├── components/
+        │   ├── BounceInUpAnim/
         │   ├── CardMovie/
         │   ├── CardMovieInfo/
+        │   ├── FadeInUpAnim/
         │   ├── ImageWithEffect/
+        │   ├── ProductionCompany/
         │   ├── SingleHeading/
-        │   └── Tag/
+        │   ├── Tag/
+        │   ├── TextLg/
+        │   ├── TextMd/
+        │   └── TextSm/
         ├── helpers/
         ├── interfaces/
         ├── pages/
@@ -83,6 +89,8 @@ In order to release make release builds please use the following commands:
 
 
 ## [Good practices](#good-practices)
+
+- Avoid unecessary comments. They are bad! Make your names and code clean so you don't need them everywhere!
 
 The project uses:
 

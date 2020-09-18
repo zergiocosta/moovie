@@ -1,4 +1,4 @@
-import { faCalendarCheck, faGlobeAmericas, faStar } from '@fortawesome/free-solid-svg-icons'
+import { faCalendarCheck, faChartLine, faStar } from '@fortawesome/free-solid-svg-icons'
 import React, { useState, useEffect } from 'react'
 
 import StorageHelper from '../../helpers/StorageHelper'
@@ -54,12 +54,12 @@ const CardMovie: React.FC<Props> = (props: Props) => {
           date={props.movie?.release_date}
         />
         <CardMovieInfo
-          icon={faGlobeAmericas}
-          text={`Language: ${props.movie?.original_language}`}
+          icon={faChartLine}
+          text={'Total votes: '+props.movie?.vote_count}
         />
         <CardMovieInfo
           icon={faStar}
-          text={props.movie?.vote_average}
+          text={(props.movie?.vote_average) && 'Score: '+props.movie?.vote_average}
         />
       </StyledCardInfo>
     </StyledCardContainer>
