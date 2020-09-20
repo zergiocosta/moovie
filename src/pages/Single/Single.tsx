@@ -1,5 +1,5 @@
 import React from 'react'
-import { StatusBar, View } from 'react-native'
+import { View } from 'react-native'
 import { ScrollView } from 'react-native-gesture-handler'
 import {
   faChartLine,
@@ -78,7 +78,6 @@ class Single extends React.Component<Props, State> {
 
     return (
       <>
-        <StatusBar barStyle="light-content" />
         <ScrollView>
           <SingleHeading movie={this.state.movie!} />
 
