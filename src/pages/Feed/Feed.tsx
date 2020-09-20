@@ -121,7 +121,9 @@ class Feed extends React.Component<Props, State> {
           onEndReachedThreshold={0.5}
           refreshing={isLoading}
           onRefresh={() => this.refreshFeed()}
+          // these next are needed to a better controll of 'onEndReached'
           onMomentumScrollBegin={() => { this.setState({isLoading: false}) }}
+          scrollEnabled={!isLoading}
         />
       </View>
     )
