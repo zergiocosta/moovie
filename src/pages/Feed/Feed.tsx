@@ -1,4 +1,5 @@
 import * as React from 'react'
+import { Button } from 'react-native'
 import { TouchableOpacity } from 'react-native-gesture-handler'
 import { AxiosError } from 'axios'
 
@@ -10,9 +11,9 @@ import FadeInUpAnim from '../../components/FadeInUpAnim/FadeInUpAnim'
 
 import {
   StyledTitle,
-  StyledFlatList
+  StyledFlatList,
+  StyledLoadMore
 } from './styles'
-import { View } from 'react-native'
 
 interface Props {
   navigation: any
@@ -37,8 +38,9 @@ class Feed extends React.Component<Props, State> {
     }
 
     this.renderItem = this.renderItem.bind(this)
+    this.renderListFooter = this.renderListFooter.bind(this)
     this.refreshFeed = this.refreshFeed.bind(this)
-    this.handleScrolling = this.handleScrolling.bind(this)
+    this.handleLoadMore = this.handleLoadMore.bind(this)
   }
 
   componentDidMount = () => {
@@ -87,7 +89,7 @@ class Feed extends React.Component<Props, State> {
     }
   }
 
-  private handleScrolling = (): void => {
+  private handleLoadMore = (): void => {
     if (!this.state.isLoading) {
       this.getMovies(this.state.page+1)
     }
@@ -107,25 +109,36 @@ class Feed extends React.Component<Props, State> {
     )
   }
 
+  private renderListFooter = () => {
+    return (
+      <StyledLoadMore>
+        <Button
+          title="Load more..."
+          color="#333"
+          onPress={this.handleLoadMore}
+        />
+      </StyledLoadMore>
+    )
+  }
+
   render = (): Element => {
     const {isLoading, movies} = this.state
 
     return (
-      <View>
+      <>
         <StyledTitle>Upcoming</StyledTitle>
         <StyledFlatList
           data={movies}
           renderItem={(item: any) => this.renderItem(item.item)}
           keyExtractor={(item: any) => item.id.toString()}
-          onEndReached={() => this.handleScrolling()}
-          onEndReachedThreshold={0.5}
           refreshing={isLoading}
           onRefresh={() => this.refreshFeed()}
           // these next are needed to a better controll of 'onEndReached'
+          ListFooterComponent={() => this.renderListFooter()}
           onMomentumScrollBegin={() => { this.setState({isLoading: false}) }}
           scrollEnabled={!isLoading}
         />
-      </View>
+      </>
     )
   }
 }
