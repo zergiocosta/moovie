@@ -49,7 +49,10 @@ class App extends React.Component {
 
     return (
       <NavigationContainer>
-        <StatusBar barStyle="light-content" />
+        <StatusBar
+          barStyle="light-content"
+          backgroundColor="#000"
+        />
         <Stack.Navigator initialRouteName="Feed">
           <Stack.Screen
             name="Feed"

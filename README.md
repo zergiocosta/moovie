@@ -41,7 +41,7 @@ The first step is to clone the repo from GitHub:
 
 Now it's time to install the dependencies:
 
-- **Installing dependencies**: `$ npm i`
+- **Installing dependencies**: `$ yarn`
 
 Everything setup. Enjoy:
 
