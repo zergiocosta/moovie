@@ -16,7 +16,6 @@ const StyledContent = styled.Text`
   margin-left: 24px;
   color: #eee;
   flex: 1;
-  flexWrap: wrap;
 `
 
 export {
