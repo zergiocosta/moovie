@@ -10,7 +10,7 @@ const StyledCardContainer = styled.View`
   margin-horizontal: 24px;
   border-top-right-radius: 12px;
   border-bottom-right-radius: 12px;
-  border-right-color: #444;
+  border-right-color: #666;
   border-right-width: 4px;
 `
 
