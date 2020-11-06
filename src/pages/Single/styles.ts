@@ -12,7 +12,7 @@ const StyledGenresWrapper = styled.View`
 const StyledSquaresWrapper = styled.View`
   display: flex;
   flex-direction: row;
-  background-color: #111;
+  background-color: #7e0f13;
 `
 
 const StyledSquareItem = styled.View`
@@ -23,9 +23,9 @@ const StyledSquareItem = styled.View`
 
 const StyledSquareItemBordered = styled(StyledSquareItem)`
   width: 34%;
-  border-left-color: #555;
+  border-left-color: #901216;
   border-left-width: 1px;
-  border-right-color: #555;
+  border-right-color: #901216;
   border-right-width: 1px;
 `
 
