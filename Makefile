@@ -8,11 +8,11 @@ LINE  = ---------------------------
 
 run-android:
 	@echo " $(INFO) Running on Android"
-	@npx react-native run-android
+	@yarn react-native run-android
 
 run-android-release:
 	@echo " $(INFO) Running Android release build"
-	@npx npx react-native run-android --variant=release
+	@yarn react-native run-android --variant=release
 
 build-android:
 	@echo " $(INFO) Building Android release binary"
@@ -20,8 +20,8 @@ build-android:
 
 run-ios:
 	@echo " $(INFO) Running on iOS"
-	@npx react-native run-ios
+	@yarn react-native run-ios
 
 build-ios:
 	@echo " $(INFO) Building iOS release binary"
-	@npx react-native bundle --entry-file index.js --platform ios --dev false --bundle-output ios/main.jsbundle --assets-dest ios
+	@yarn react-native bundle --entry-file index.js --platform ios --dev false --bundle-output ios/main.jsbundle --assets-dest ios
