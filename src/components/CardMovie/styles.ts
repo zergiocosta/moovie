@@ -20,10 +20,12 @@ const StyledCardMovieName = styled.Text`
   flex-wrap: wrap;
   flex-shrink: 1;
   font-size: 18px;
+  width: 75%;
 `
 
 const StyledCardInfo = styled.View`
   padding: 24px;
+  padding-left: 16px;
   max-width: 95%;
 `
 
