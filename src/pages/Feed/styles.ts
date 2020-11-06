@@ -6,7 +6,7 @@ const StyledTitle = styled.Text`
   padding-horizontal: 24px;
   background-color: #181818;
   color: #eee;
-  font-size: 38px;
+  font-size: 32px;
   font-weight: bold;
 `
 
@@ -15,7 +15,15 @@ const StyledFlatList = styled.FlatList`
   background-color: #181818;
 `
 
+const StyledLoadMore = styled.View`
+  margin-bottom: 25px;
+  margin-top: 25px;
+  margin-left: 24px;
+  margin-right: 24px;
+`
+
 export {
   StyledTitle,
-  StyledFlatList
+  StyledFlatList,
+  StyledLoadMore
 }
